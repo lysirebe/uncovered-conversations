@@ -1,0 +1,5 @@
+export const APPLY_URL    = 'https://forms.gle/af38XghDNZKD3mg16'
+export const PARTNER_FORM = 'https://forms.gle/F2PZB9Q9xDQ6amfB8'
+export const VOLUNTEER_URL = 'https://forms.gle/X3B2eNnofB8RBeJA9'
+export const BOOK_A_CALL  = 'https://calendar.app.google/jpXEE58xCB7UNMa1A'
+export const CONTACT_EMAIL = 'mailto:admin@uncoveredconversations.com'
