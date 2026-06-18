@@ -103,9 +103,14 @@ export default function AboutPage() {
       {/* Team */}
       <TeamSection />
 
-      {/* CTA */}
+      {/* Join us CTA */}
       <section className="hf-cta-c tight">
         <div className="hf-c">
+          <h3>want to join the <em>team?</em></h3>
+          <p className="hf-cta-c__body">
+            Want to join us and be part of the team at UC — even on a volunteer basis?
+          </p>
+          <div className="hf-cta-c__label">Click below to join</div>
           <div className="ctas big">
             <a href={VOLUNTEER_URL} target="_blank" rel="noopener noreferrer" className="hf-btn acc">
               Join us here <span className="arr">→</span>

@@ -14,7 +14,6 @@ export function PromoSection() {
         <div className="hf-c">
           <div className="hd">
             <h3>here&apos;s a glimpse into <em>our community.</em></h3>
-            <button className="hf-btn outline" onClick={() => setGallery(true)}>See more →</button>
           </div>
 
           {/* Video card — full container width; when playing, renders video at native 9:16 */}

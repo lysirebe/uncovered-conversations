@@ -31,9 +31,6 @@ export default function HomePage() {
           </h1>
           <div className="tag">igniting one life at a time</div>
           <div className="ctas">
-            <Link href="/internship" className="hf-btn acc">
-              Join the movement <span className="arr">→</span>
-            </Link>
             <span className="hf-btn outline">↓ Scroll the story</span>
           </div>
         </div>
@@ -110,16 +107,14 @@ export default function HomePage() {
             <div className="chip-acc">UC Internship · cohort 02 open</div>
             <h3>ready to get real <em>experience?</em></h3>
           </div>
-          <div className="right" style={{ display: 'flex', flexDirection: 'column', gap: 20 }}>
+          <div className="right" style={{ display: 'flex', flexDirection: 'column', gap: 20, alignItems: 'center', textAlign: 'center' }}>
             <p>
               A 12-week paid placement inside a founder-led organisation — with training,
               mentorship and a cohort that becomes your network for life.
             </p>
-            <div>
-              <a className="hf-btn acc" href={APPLY_URL} target="_blank" rel="noopener noreferrer">
-                Apply now <span className="arr">→</span>
-              </a>
-            </div>
+            <a className="hf-btn acc" href={APPLY_URL} target="_blank" rel="noopener noreferrer">
+              Apply now <span className="arr">→</span>
+            </a>
           </div>
         </div>
       </section>

@@ -26,7 +26,6 @@ export default function ResourcesPage() {
     <>
       <Nav />
 
-      {/* Hero */}
       <section className="hf-phero">
         <span className="hf-blob b2" />
         <div className="hf-c">
@@ -47,7 +46,7 @@ export default function ResourcesPage() {
         </div>
       </section>
 
-      {/* ── Section 1: Curated by UC ─────────────────────────────── */}
+      {/* ── Curated by UC ──────────────────────────────────────────── */}
       <section className="hf-resources">
         <div className="hf-c">
           <div className="res-section-hd">
@@ -57,7 +56,34 @@ export default function ResourcesPage() {
             </div>
           </div>
 
+          {/* Mobile dropdown filter */}
+          <div className="res-mobile-filters">
+            <select
+              value={areaFilter}
+              onChange={(e) => setAreaFilter(e.target.value as Area | 'All')}
+              className="res-mobile-select"
+              aria-label="Filter by area"
+            >
+              <option value="All">All areas ({RESOURCES.length})</option>
+              {AREAS.map((a) => (
+                <option key={a.id} value={a.label}>{a.label} ({a.n})</option>
+              ))}
+            </select>
+            <select
+              value={mediaFilter}
+              onChange={(e) => setMediaFilter(e.target.value as Media | 'All')}
+              className="res-mobile-select"
+              aria-label="Filter by media type"
+            >
+              <option value="All">All media</option>
+              {MEDIA_TYPES.map((m) => (
+                <option key={m.id} value={m.label}>{m.icon} {m.label}</option>
+              ))}
+            </select>
+          </div>
+
           <div className="layout">
+            {/* Desktop sidebar */}
             <aside className="sidebar">
               <h4>Area</h4>
               <div className="filters">
@@ -107,7 +133,7 @@ export default function ResourcesPage() {
                   return (
                     <div className="card" key={i}>
                       {r.cover ? (
-                        <div className="cover" style={{ position: 'relative', overflow: 'hidden' }}>
+                        <div className="cover" style={{ overflow: 'hidden' }}>
                           {/* eslint-disable-next-line @next/next/no-img-element */}
                           <img src={r.cover} alt={r.title} style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }} />
                         </div>
@@ -135,15 +161,12 @@ export default function ResourcesPage() {
                   )
                 })}
               </div>
-              <div style={{ textAlign: 'center', marginTop: 28 }}>
-                <button className="hf-btn outline">Load more ↓</button>
-              </div>
             </div>
           </div>
         </div>
       </section>
 
-      {/* ── Section 2: Created by UC ──────────────────────────────── */}
+      {/* ── Created by UC ──────────────────────────────────────────── */}
       <section className="hf-res-created">
         <div className="hf-c">
           <div className="res-section-hd">
@@ -166,7 +189,6 @@ export default function ResourcesPage() {
         </div>
       </section>
 
-      {/* Submit CTA */}
       <section className="hf-cta-c">
         <div className="hf-c">
           <div className="kicker">community-built ↺</div>
