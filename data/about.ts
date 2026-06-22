@@ -50,15 +50,15 @@ export const TEAM: TeamMember[] = [
   },
   {
     name: 'Adeoti', role: 'Head of Programmes', photo: '/assets/team-adeoti.jpg',
-    bio: 'Adeoti Osifeso is a marketing and social impact professional specialising in advocacy communications, storytelling, brand strategy, and program design. A proud honours graduate of the American University of Nigeria and current Master\'s candidate in Media and Communications at Pan-Atlantic University, she brings cross-industry experience across law, oil and gas, banking, tech, fashion, beauty, and social impact. Her work centres on campaigns and partnerships that amplify voices, shift narratives, and foster community transformation, with a deep commitment to youth empowerment, women\'s empowerment, and national development.',
+    bio: 'Adeoti is a marketing and social impact professional specialising in advocacy communications, storytelling, brand strategy, and program design. A proud honours graduate of the American University of Nigeria and current Master\'s candidate in Media and Communications at Pan-Atlantic University, she brings cross-industry experience across law, oil and gas, banking, tech, fashion, beauty, and social impact. Her work centres on campaigns and partnerships that amplify voices, shift narratives, and foster community transformation, with a deep commitment to youth empowerment, women\'s empowerment, and national development.',
   },
   {
     name: 'Dunke', role: 'Community Management Team', photo: '/assets/team-dunke.jpg',
-    bio: 'Dunke Majekodunmi is on the Community Management Team at Uncovered Conversations, where she helps foster meaningful engagement and build authentic connections within the community. A creative and purpose-driven marketing and communications enthusiast, she is passionate about branding, storytelling, and creating impactful experiences. With experience in customer relations, social media management, and creative strategy, Dunke enjoys bringing ideas to life across fashion, food, wellness and faith-centred projects.',
+    bio: 'Dunke is on the Community Management Team at Uncovered Conversations, where she helps foster meaningful engagement and build authentic connections within the community. A creative and purpose-driven marketing and communications enthusiast, she is passionate about branding, storytelling, and creating impactful experiences. With experience in customer relations, social media management, and creative strategy, Dunke enjoys bringing ideas to life across fashion, food, wellness and faith-centred projects.',
   },
   {
     name: 'Anne', role: 'Programmes Team', photo: '/assets/team-anne.jpg',
-    bio: 'Anne Ihediwa is a Programmes Team Member at Uncovered Conversations, where she helps design and support programmes aimed at creating positive change through meaningful community engagement. With experience in events and a passion for building genuine connections, she brings warmth, faith, and intentionality into all she does. Anne loves living a life rooted in faith, amazing conversations, and authentic relationships, and lives by the mantra, "The measure of love is love without measure."',
+    bio: 'Anne is a Programmes Team Member at Uncovered Conversations, where she helps design and support programmes aimed at creating positive change through meaningful community engagement. With experience in events and a passion for building genuine connections, she brings warmth, faith, and intentionality into all she does. Anne loves living a life rooted in faith, amazing conversations, and authentic relationships, and lives by the mantra, "The measure of love is love without measure."',
   },
 ]
 

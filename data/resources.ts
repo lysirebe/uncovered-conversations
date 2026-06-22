@@ -6,9 +6,7 @@ export interface Resource {
   by?: string
   category: Category
   url: string
-  /** Direct image URL (e.g. YouTube thumbnail) */
   cover?: string
-  /** true = designed gradient placeholder; leave a cover comment below */
   coverPlaceholder?: boolean
 }
 
@@ -19,8 +17,15 @@ export const RESOURCES: Resource[] = [
     title: 'How To Build a Success Mindset Through the Power of Belief',
     category: 'Video',
     url: 'https://youtu.be/RbwaApBYmJk',
-    // YouTube thumbnail wired directly — ID: RbwaApBYmJk
     cover: 'https://img.youtube.com/vi/RbwaApBYmJk/maxresdefault.jpg',
+  },
+  {
+    id: 'v2',
+    title: 'Atomic Habits — author talk',
+    by: 'James Clear · YouTube',
+    category: 'Video',
+    url: 'https://youtu.be/PZ7lDrwYdZc',
+    cover: '/assets/reosurce-3.jpeg',
   },
 
   // ── Podcasts ─────────────────────────────────────────────────
@@ -30,7 +35,6 @@ export const RESOURCES: Resource[] = [
     by: 'Hearing God, Faith & Life Decisions — EP 7',
     category: 'Podcast',
     url: 'https://youtu.be/46-hLkHhdpE',
-    // YouTube thumbnail wired directly — ID: 46-hLkHhdpE
     cover: 'https://img.youtube.com/vi/46-hLkHhdpE/maxresdefault.jpg',
   },
   {
@@ -48,6 +52,22 @@ export const RESOURCES: Resource[] = [
     url: 'https://podcasts.apple.com/ng/podcast/the-magnify-conversations/id1515544903',
     cover: '/assets/resource-magnifyconvos.webp',
   },
+  {
+    id: 'p4',
+    title: 'How I Built This',
+    by: 'Guy Raz · NPR',
+    category: 'Podcast',
+    url: 'https://www.npr.org/series/490248027/how-i-built-this',
+    cover: '/assets/reosurce-2.webp',
+  },
+  {
+    id: 'p5',
+    title: 'The Knowledge Project',
+    by: 'Shane Parrish',
+    category: 'Podcast',
+    url: 'https://fs.blog/knowledge-project-podcast/',
+    cover: '/assets/resource-5.jpeg',
+  },
 
   // ── Books ────────────────────────────────────────────────────
   {
@@ -57,6 +77,22 @@ export const RESOURCES: Resource[] = [
     category: 'Book',
     url: 'https://www.amazon.co.uk/Unleash-Your-Superpowers-Discover-talents-ebook/dp/B0BRGF57BS',
     cover: '/assets/resource-unleashyoursuperpowers.jpg',
+  },
+  {
+    id: 'b2',
+    title: 'Smart Women Finish Rich',
+    by: 'David Bach',
+    category: 'Book',
+    url: 'https://www.amazon.co.uk/Smart-Women-Finish-Rich-Financial/dp/0767998588',
+    cover: '/assets/reosource-4.png',
+  },
+  {
+    id: 'b3',
+    title: 'The Psychology of Money',
+    by: 'Morgan Housel',
+    category: 'Book',
+    url: 'https://www.amazon.co.uk/Psychology-Money-Timeless-lessons-happiness/dp/0857197681',
+    cover: '/assets/resources-1.png',
   },
 ]
 
