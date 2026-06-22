@@ -1853,3 +1853,141 @@ html, body { margin: 0; padding: 0 }
   width: 24px;
   height: 24px;
 }
+
+/* ── Opportunities page ──────────────────────────────────────── */
+.hf-phero__sub {
+  font-size: 18px;
+  line-height: 1.65;
+  color: var(--hf-ink-2);
+  max-width: 580px;
+  margin: 18px 0 0;
+}
+
+.hf-opp { padding: 0 0 96px }
+
+.hf-opp__grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 18px;
+  margin-bottom: 28px;
+}
+
+/* Card — same hover language as partnerships "ways to partner" */
+.hf-opp__card {
+  background: var(--hf-card);
+  border: 1px solid var(--hf-line);
+  border-radius: 22px;
+  padding: 34px 30px;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  overflow: hidden;
+  transition: transform .2s ease, box-shadow .2s ease, border-color .2s ease;
+}
+.hf-opp__card::before {
+  content: "";
+  position: absolute; left: 0; right: 0; top: 0; height: 4px;
+  background: var(--hf-acc);
+  transform: scaleX(0); transform-origin: left;
+  transition: transform .3s ease;
+}
+.hf-opp__card:hover {
+  transform: translateY(-6px);
+  border-color: var(--hf-acc);
+  box-shadow: 0 30px 60px -28px color-mix(in oklab, var(--hf-acc) 55%, rgba(0,0,0,.5));
+}
+.hf-opp__card:hover::before { transform: scaleX(1) }
+
+/* Dark variant */
+.hf-opp__card--dark {
+  background: var(--hf-ink);
+  border-color: var(--hf-ink);
+  color: #fff;
+}
+.hf-opp__card--dark::before { background: var(--hf-acc) }
+.hf-opp__card--dark:hover { border-color: var(--hf-acc) }
+
+.hf-opp__chip {
+  display: inline-block;
+  font: 800 11px/1 var(--hf-grot);
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  background: var(--hf-acc);
+  color: var(--hf-on-acc, #fff);
+  padding: 7px 14px;
+  border-radius: 99px;
+  align-self: flex-start;
+  margin-bottom: 18px;
+}
+.hf-opp__card--dark .hf-opp__chip {
+  background: rgba(255,255,255,.12);
+  color: rgba(255,255,255,.9);
+}
+
+.hf-opp__card h4 {
+  font-family: var(--font-instrument-serif, "Instrument Serif"), Georgia, serif;
+  font-size: 30px;
+  font-weight: 400;
+  line-height: 1.1;
+  margin: 0 0 10px;
+  letter-spacing: -.01em;
+}
+.hybrid .hf-opp__card h4 {
+  font-family: var(--font-archivo-black, "Archivo Black"), sans-serif;
+  text-transform: uppercase;
+  font-size: 23px;
+  letter-spacing: -.02em;
+}
+.hf-opp__card--dark h4 { color: #fff }
+
+.hf-opp__card p {
+  font-size: 15px;
+  line-height: 1.6;
+  color: var(--hf-ink-2);
+  margin: 0 0 28px;
+  flex: 1;
+}
+.hf-opp__card--dark p { color: rgba(255,255,255,.72) }
+
+.hf-opp__cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  align-self: flex-start;
+  background: var(--hf-ink);
+  color: #fff;
+  text-decoration: none;
+  padding: 13px 22px;
+  border-radius: 99px;
+  font: 700 13px/1 var(--hf-grot);
+  letter-spacing: .02em;
+  transition: background .2s ease, gap .2s ease;
+}
+.hf-opp__cta span { transition: transform .2s ease }
+.hf-opp__card:hover .hf-opp__cta { background: var(--hf-acc); color: var(--hf-on-acc, #fff) }
+.hf-opp__card:hover .hf-opp__cta span { transform: translateX(3px) }
+
+.hf-opp__card--dark .hf-opp__cta {
+  background: var(--hf-acc);
+  color: var(--hf-on-acc, #fff);
+}
+.hf-opp__card--dark:hover .hf-opp__cta {
+  background: #fff;
+  color: var(--hf-ink);
+}
+
+.hf-opp__reassurance {
+  text-align: center;
+  font-family: var(--font-instrument-serif, "Instrument Serif"), Georgia, serif;
+  font-style: italic;
+  font-size: 14px;
+  color: var(--hf-muted);
+  line-height: 1.5;
+  margin: 0;
+}
+
+@media (max-width: 768px) {
+  .hf-opp__grid { grid-template-columns: 1fr }
+  .hf-opp { padding: 0 0 64px }
+  .hf-opp__card h4 { font-size: 24px }
+}
