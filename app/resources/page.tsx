@@ -1,3 +1,6 @@
+'use client'
+
+import { useState } from 'react'
 import { Nav } from '@/components/Nav'
 import { Footer } from '@/components/Footer'
 import { RESOURCES, CATEGORIES } from '@/data/resources'
@@ -8,7 +11,6 @@ const CAT_TINT: Record<Category, string> = {
   Podcast: 'var(--hf-acc-2)',
   Book: 'var(--hf-ink)',
 }
-
 const CAT_GLYPH: Record<Category, string> = {
   Video: '▶',
   Podcast: '🎙',
@@ -16,6 +18,10 @@ const CAT_GLYPH: Record<Category, string> = {
 }
 
 export default function ResourcesPage() {
+  const [catFilter, setCatFilter] = useState<Category | 'All'>('All')
+
+  const filtered = catFilter === 'All' ? RESOURCES : RESOURCES.filter(r => r.category === catFilter)
+
   return (
     <>
       <Nav />
@@ -30,69 +36,106 @@ export default function ResourcesPage() {
             A living library — videos, podcasts and books curated by the UC team and
             recommended by our community.
           </div>
-          <span style={{ fontFamily: 'var(--font-caveat, "Caveat"), cursive', fontSize: 20, color: 'var(--hf-acc)' }}>
-            updated regularly
-          </span>
+          <div style={{ display: 'flex', gap: 10, alignItems: 'center' }}>
+            <span style={{ fontFamily: 'var(--font-caveat, "Caveat"), cursive', fontSize: 20, color: 'var(--hf-acc)' }}>
+              updated regularly
+            </span>
+            <span style={{ fontFamily: 'var(--font-jetbrains-mono, "JetBrains Mono"), monospace', fontSize: 11, color: 'var(--hf-muted)', letterSpacing: '.05em' }}>
+              · {RESOURCES.length} resources live
+            </span>
+          </div>
         </div>
       </section>
 
       {/* ── Curated by UC ─────────────────────────────────────────── */}
-      <section className="hf-resources hf-res-grouped">
+      <section className="hf-resources">
         <div className="hf-c">
           <div className="res-section-hd">
             <h2 className="res-section-title">Curated by UC</h2>
             <p className="res-section-sub">Hand-picked from across the web — the resources our team recommends.</p>
           </div>
 
-          {CATEGORIES.map(({ id, label, icon }) => {
-            const items = RESOURCES.filter((r) => r.category === id)
-            if (!items.length) return null
-            return (
-              <div className="res-cat-block" key={id}>
-                <div className="res-cat-hd">
-                  <span className="res-cat-icon">{icon}</span>
-                  <h3 className="res-cat-title">{label}</h3>
-                </div>
-                <div className="res-cat-grid">
-                  {items.map((r) => (
-                    <a
-                      key={r.id}
-                      href={r.url}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="res-card"
-                    >
-                      <div className="res-card__cover">
-                        {r.cover ? (
-                          // eslint-disable-next-line @next/next/no-img-element
-                          <img src={r.cover} alt={r.title} />
-                        ) : (
-                          // Designed placeholder — add cover URL in data/resources.ts to replace
-                          <div
-                            className="res-card__placeholder"
-                            style={{ '--cover-from': CAT_TINT[id] } as React.CSSProperties}
-                          >
-                            <span className="res-card__glyph">{CAT_GLYPH[id]}</span>
-                            <span className="res-card__ptitle">{r.title}</span>
-                            {r.by && <span className="res-card__pby">{r.by}</span>}
-                          </div>
-                        )}
-                        <span className="res-card__overlay">Open →</span>
-                      </div>
-                      <div className="res-card__body">
-                        <span className="res-card__cat">{r.category}</span>
-                        <div className="res-card__title">{r.title}</div>
-                        {r.by && <div className="res-card__by">{r.by}</div>}
-                      </div>
-                    </a>
-                  ))}
-                </div>
-              </div>
-            )
-          })}
+          {/* Mobile dropdown */}
+          <div className="res-mobile-filters">
+            <select
+              value={catFilter}
+              onChange={e => setCatFilter(e.target.value as Category | 'All')}
+              className="res-mobile-select"
+              aria-label="Filter by type"
+            >
+              <option value="All">All ({RESOURCES.length})</option>
+              {CATEGORIES.map(c => (
+                <option key={c.id} value={c.id}>{c.icon} {c.label}</option>
+              ))}
+            </select>
+          </div>
 
-          <div style={{ textAlign: 'center', marginTop: 16 }}>
-            <button className="hf-btn outline">Submit a resource ↑</button>
+          <div className="layout">
+            {/* Desktop sidebar */}
+            <aside className="sidebar">
+              <h4>Type</h4>
+              <div className="filters">
+                <div className={`filter${catFilter === 'All' ? ' on' : ''}`} onClick={() => setCatFilter('All')}>
+                  <span className="box" /><span>All</span><span className="count">{RESOURCES.length}</span>
+                </div>
+                {CATEGORIES.map(c => {
+                  const n = RESOURCES.filter(r => r.category === c.id).length
+                  return (
+                    <div
+                      key={c.id}
+                      className={`filter${catFilter === c.id ? ' on' : ''}`}
+                      onClick={() => setCatFilter(catFilter === c.id ? 'All' : c.id)}
+                    >
+                      <span className="box" />
+                      <span>{c.icon} {c.label}</span>
+                      <span className="count">{n}</span>
+                    </div>
+                  )
+                })}
+              </div>
+            </aside>
+
+            <div className="grid-area">
+              <div className="top">
+                <div className="ct"><b>{filtered.length}</b> resources</div>
+                <button className="hf-btn outline" style={{ padding: '8px 14px' }}>Submit a resource ↑</button>
+              </div>
+              <div className="grid res-grid--sm">
+                {filtered.map(r => (
+                  <a
+                    key={r.id}
+                    href={r.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="card"
+                    style={{ textDecoration: 'none', color: 'inherit' }}
+                  >
+                    <div className="cover" style={{ position: 'relative', overflow: 'hidden' }}>
+                      {r.cover ? (
+                        // eslint-disable-next-line @next/next/no-img-element
+                        <img src={r.cover} alt={r.title} style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }} />
+                      ) : (
+                        <div
+                          className="cover designed"
+                          style={{ '--cover-from': CAT_TINT[r.category], width: '100%', height: '100%', display: 'flex', flexDirection: 'column', justifyContent: 'flex-end', padding: '18px 16px' } as React.CSSProperties}
+                        >
+                          <span className="glyph">{CAT_GLYPH[r.category]}</span>
+                          <span className="ct">{r.title}</span>
+                          {r.by && <span className="cby">{r.by}</span>}
+                        </div>
+                      )}
+                    </div>
+                    <div className="tags">
+                      <span className="tag acc">{r.category}</span>
+                    </div>
+                    <div className="body">
+                      <div className="title">{r.title}</div>
+                      {r.by && <div className="by">{r.by}</div>}
+                    </div>
+                  </a>
+                ))}
+              </div>
+            </div>
           </div>
         </div>
       </section>

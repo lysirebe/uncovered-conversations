@@ -726,7 +726,7 @@ html, body { margin: 0; padding: 0 }
   aspect-ratio: 3/4;
 }
 .fcard:hover .pic { box-shadow: 0 32px 60px -24px rgba(0,0,0,.55) }
-.fcard .pic img { width: 100%; height: 100%; object-fit: cover; display: block }
+.fcard .pic img { width: 100%; height: 100%; object-fit: contain; display: block; background: var(--hf-card) }
 .fcard .pic .look {
   position: absolute; left: 12px; bottom: 12px;
   background: var(--hf-acc); color: var(--hf-on-acc, #fff);
@@ -1828,4 +1828,29 @@ html, body { margin: 0; padding: 0 }
 @media (max-width: 480px) {
   .res-cat-grid { grid-template-columns: 1fr; gap: 10px }
   .res-card__cover { aspect-ratio: 16/7 }
+}
+
+/* ── Footer social icon row ──────────────────────────────────── */
+.footer-socials {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  padding: 4px 0 2px;
+}
+.footer-social-link {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 38px;
+  height: 38px;
+  border-radius: 10px;
+  background: rgba(255,255,255,.08);
+  color: rgba(255,255,255,.75);
+  text-decoration: none;
+  transition: background .15s, color .15s, transform .15s;
+}
+.footer-social-link:hover {
+  background: var(--hf-acc);
+  color: #fff;
+  transform: translateY(-2px);
 }

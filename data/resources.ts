@@ -39,16 +39,14 @@ export const RESOURCES: Resource[] = [
     by: 'Finding Purpose and Focus in VUCA',
     category: 'Podcast',
     url: 'https://podcasts.apple.com/gb/podcast/finding-purpose-and-focus-in-vuca-volatile-uncertain/id1227337850?i=1000709274957',
-    // TODO: add cover — e.g. cover: '/assets/podcast-voice-of-change.jpg'
-    coverPlaceholder: true,
+    cover: '/assets/resource-voiceofchange.webp',
   },
   {
     id: 'p3',
     title: 'The Magnify Conversations',
     category: 'Podcast',
     url: 'https://podcasts.apple.com/ng/podcast/the-magnify-conversations/id1515544903',
-    // TODO: add cover — e.g. cover: '/assets/podcast-magnify-conversations.jpg'
-    coverPlaceholder: true,
+    cover: '/assets/resource-magnifyconvos.webp',
   },
 
   // ── Books ────────────────────────────────────────────────────
@@ -58,8 +56,7 @@ export const RESOURCES: Resource[] = [
     by: 'Foluso Gbadamosi',
     category: 'Book',
     url: 'https://www.amazon.co.uk/Unleash-Your-Superpowers-Discover-talents-ebook/dp/B0BRGF57BS',
-    // TODO: add cover — e.g. cover: '/assets/book-unleash-superpowers.jpg'
-    coverPlaceholder: true,
+    cover: '/assets/resource-unleashyoursuperpowers.jpg',
   },
 ]
 
