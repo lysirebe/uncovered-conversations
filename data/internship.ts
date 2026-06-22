@@ -54,11 +54,11 @@ export interface SpotlightIntern {
 }
 
 export const SPOTLIGHT: SpotlightIntern[] = [
-  { name: 'Tobi Olayiwola — Programs Intern at Kobikam Africa', short: 'Tobi', photo: '/assets/intern-tobi.jpg', video: true, videoSrc: '/assets/video-tobi-testimonial.MP4' },
-  { name: 'Amen Olorunnisola — Marketing Intern', short: 'Amen', photo: '/assets/intern-amen.jpg' },
-  { name: 'Dunke Majekodunmi — Marketing Intern at Haske Cafe', short: 'Dunke', photo: '/assets/intern-dunke.jpg' },
-  { name: 'Ronke — UC Intern', short: 'Ronke', photo: '/assets/intern-ronke.jpg', video: true, videoSrc: '/assets/video-dunke-testimonial.MP4' },
-  { name: 'Anne — UC Intern', short: 'Anne', photo: '/assets/intern-anne.jpg', video: true, videoSrc: '/assets/video-anne-testimonial.MP4' },
+  { name: 'Tobi Olayiwola — Programs Intern at Kobikam Africa', short: 'Tobi', photo: '/assets/tobi.png', video: true, videoSrc: '/assets/video-tobi-testimonial.MP4' },
+  { name: 'Amen Olorunnisola — Marketing Intern', short: 'Amen', photo: '/assets/Amen.png' },
+  { name: 'Dunke Majekodunmi — Marketing Intern at Haske Cafe', short: 'Dunke', photo: '/assets/dunke.png' },
+  { name: 'Ronke — UC Intern', short: 'Ronke', photo: '/assets/ronke.png', video: true, videoSrc: '/assets/video-dunke-testimonial.MP4' },
+  { name: 'Anne — UC Intern', short: 'Anne', photo: '/assets/anne.png', video: true, videoSrc: '/assets/video-anne-testimonial.MP4' },
 ]
 
 export interface Partner {
@@ -73,5 +73,3 @@ export const PARTNERS: Partner[] = [
   { name: 'Kobikam Africa', src: '/assets/partner-kobikam.jpg' },
   { name: 'Arami', src: '/assets/partner-arami.jpg' },
 ]
-
-export const APPLY_URL = 'https://forms.gle/af38XghDNZKD3mg16'

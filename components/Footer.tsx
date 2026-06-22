@@ -1,4 +1,5 @@
 import Link from 'next/link'
+import { NewsletterForm } from './NewsletterForm'
 
 export function Footer() {
   return (
@@ -39,10 +40,7 @@ export function Footer() {
             <div style={{ fontSize: 12.5, color: 'rgba(255,255,255,.6)', marginBottom: 10, lineHeight: 1.4 }}>
               monthly drops — new conversations, resources, opportunities.
             </div>
-            <div className="nl">
-              <input type="email" placeholder="you@email.com" />
-              <button type="button">Sign up</button>
-            </div>
+            <NewsletterForm />
           </div>
         </div>
         <div className="bot">

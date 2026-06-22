@@ -1,32 +1,70 @@
-export type Area = 'Finances' | 'Faith' | 'Career' | 'Personal development'
-export type Media = 'Book' | 'Podcast' | 'Video'
+export type Category = 'Video' | 'Podcast' | 'Book'
 
 export interface Resource {
+  id: string
   title: string
-  by: string
-  area: Area
-  media: Media
-  tagAcc?: boolean
-  uc?: boolean
+  by?: string
+  category: Category
+  url: string
+  /** Direct image URL (e.g. YouTube thumbnail) */
   cover?: string
+  /** true = designed gradient placeholder; leave a cover comment below */
+  coverPlaceholder?: boolean
 }
 
 export const RESOURCES: Resource[] = [
-  { title: 'The Knowledge Project', by: 'Shane Parrish', area: 'Personal development', media: 'Podcast', cover: '/assets/resource-5.jpeg' },
-  { title: 'Smart Women Finish Rich', by: 'David Bach', area: 'Finances', media: 'Book', cover: '/assets/reosource-4.png' },
-  { title: 'Atomic Habits — author talk', by: 'James Clear · YouTube', area: 'Personal development', media: 'Video', cover: '/assets/reosurce-3.jpeg' },
-  { title: 'How I Built This', by: 'Guy Raz · NPR', area: 'Career', media: 'Podcast', cover: '/assets/reosurce-2.webp' },
-  { title: 'The Psychology of Money', by: 'Morgan Housel', area: 'Finances', media: 'Book', tagAcc: true, cover: '/assets/resources-1.png' },
+  // ── Videos ──────────────────────────────────────────────────
+  {
+    id: 'v1',
+    title: 'How To Build a Success Mindset Through the Power of Belief',
+    category: 'Video',
+    url: 'https://youtu.be/RbwaApBYmJk',
+    // YouTube thumbnail wired directly — ID: RbwaApBYmJk
+    cover: 'https://img.youtube.com/vi/RbwaApBYmJk/maxresdefault.jpg',
+  },
+
+  // ── Podcasts ─────────────────────────────────────────────────
+  {
+    id: 'p1',
+    title: 'When God Calls You to Let Go of Your Dream Job',
+    by: 'Hearing God, Faith & Life Decisions — EP 7',
+    category: 'Podcast',
+    url: 'https://youtu.be/46-hLkHhdpE',
+    // YouTube thumbnail wired directly — ID: 46-hLkHhdpE
+    cover: 'https://img.youtube.com/vi/46-hLkHhdpE/maxresdefault.jpg',
+  },
+  {
+    id: 'p2',
+    title: 'Voice of Change',
+    by: 'Finding Purpose and Focus in VUCA',
+    category: 'Podcast',
+    url: 'https://podcasts.apple.com/gb/podcast/finding-purpose-and-focus-in-vuca-volatile-uncertain/id1227337850?i=1000709274957',
+    // TODO: add cover — e.g. cover: '/assets/podcast-voice-of-change.jpg'
+    coverPlaceholder: true,
+  },
+  {
+    id: 'p3',
+    title: 'The Magnify Conversations',
+    category: 'Podcast',
+    url: 'https://podcasts.apple.com/ng/podcast/the-magnify-conversations/id1515544903',
+    // TODO: add cover — e.g. cover: '/assets/podcast-magnify-conversations.jpg'
+    coverPlaceholder: true,
+  },
+
+  // ── Books ────────────────────────────────────────────────────
+  {
+    id: 'b1',
+    title: 'Unleash Your Superpowers',
+    by: 'Foluso Gbadamosi',
+    category: 'Book',
+    url: 'https://www.amazon.co.uk/Unleash-Your-Superpowers-Discover-talents-ebook/dp/B0BRGF57BS',
+    // TODO: add cover — e.g. cover: '/assets/book-unleash-superpowers.jpg'
+    coverPlaceholder: true,
+  },
 ]
 
-export const AREAS = [
-  { id: 'finances', label: 'Finances', n: 2 },
-  { id: 'career', label: 'Career', n: 1 },
-  { id: 'growth', label: 'Personal development', n: 2 },
-]
-
-export const MEDIA_TYPES = [
-  { id: 'book', label: 'Book', icon: '📖' },
-  { id: 'podcast', label: 'Podcast', icon: '🎙' },
-  { id: 'video', label: 'Video', icon: '▶' },
+export const CATEGORIES: { id: Category; label: string; icon: string }[] = [
+  { id: 'Video', label: 'Videos', icon: '▶' },
+  { id: 'Podcast', label: 'Podcasts', icon: '🎙' },
+  { id: 'Book', label: 'Books', icon: '📖' },
 ]

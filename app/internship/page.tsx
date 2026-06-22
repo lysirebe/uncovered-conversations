@@ -110,7 +110,7 @@ export default function InternshipPage() {
             <div className="card">
               <div className="chip">For interns</div>
               <h4>Cohort 02 — July &apos;26</h4>
-              <p>Applications are open now. You&apos;ll need a CV, a short video pitch, and one reference. Paid placement, full support.</p>
+              <p>Applications are open now. All you&apos;ll need is a CV.</p>
               <a className="hf-btn acc" href={APPLY_URL} target="_blank" rel="noopener noreferrer">
                 July &apos;26 — apply now <span className="arr">→</span>
               </a>
