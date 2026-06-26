@@ -13,7 +13,7 @@ export function PromoSection() {
       <section className="hf-promo">
         <div className="hf-c">
           <div className="hd">
-            <h3>here&apos;s a glimpse into <em>our community.</em></h3>
+            <h3><strong>here&apos;s a glimpse into</strong> <em>our community.</em></h3>
           </div>
 
           {/* Video card — full container width; when playing, renders video at native 9:16 */}

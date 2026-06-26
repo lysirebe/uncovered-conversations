@@ -2265,3 +2265,186 @@ html, body { margin: 0; padding: 0 }
   transition: background .15s;
 }
 .about-hero-vid__close:hover { background: var(--hf-acc) }
+
+/* ── HeroAutoVideo (internship hero + home internship section) ── */
+.hav {
+  position: absolute; inset: 0;
+  border-radius: inherit;
+  overflow: hidden;
+  background: var(--hf-surface);
+}
+.hav--playing { background: #111 }
+
+.hav__poster {
+  position: absolute; inset: 0;
+  width: 100%; height: 100%;
+  object-fit: cover; object-position: center 30%;
+  display: block;
+  transition: opacity .9s ease;
+  z-index: 2;
+}
+.hav__poster--fade { opacity: 0 }
+
+.hav__video {
+  position: absolute; inset: 0;
+  width: 100%; height: 100%;
+  object-fit: contain;   /* native aspect ratio — no stretching */
+  display: block;
+  opacity: 0;
+  transition: opacity .7s ease;
+  z-index: 1;
+}
+.hav__video--visible { opacity: 1 }
+
+/* Container for HeroAutoVideo — must be position:relative */
+.hav-container {
+  position: relative;
+  border-radius: 20px;
+  overflow: hidden;
+  width: 100%;
+}
+
+/* ── Home internship section — new two-part layout ──────────── */
+/* Override old 2-col grid on .hf-c */
+.hf-intern-cta .hf-c { display: flex !important; flex-direction: column; gap: 36px }
+.hf-intern-cta .hf-c::before { display: none }  /* remove radial gradient pseudo */
+
+.intern-top {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 48px;
+  align-items: start;
+}
+.intern-top .left { display: flex; flex-direction: column; gap: 14px }
+.intern-top-sub {
+  font-size: 16px; line-height: 1.6; color: var(--hf-ink-2); margin: 0;
+}
+/* Right column: video container */
+.intern-top .right {
+  position: relative;
+  aspect-ratio: 4/5;
+  border-radius: 20px;
+  overflow: hidden;
+}
+
+.intern-bottom {
+  text-align: center;
+  display: flex; flex-direction: column; align-items: center; gap: 20px;
+}
+.intern-bottom p {
+  font-size: 20px; font-weight: 700; line-height: 1.5;
+  color: var(--hf-ink); margin: 0;
+  font-family: var(--hf-grot);
+  max-width: 560px;
+}
+
+/* Hybrid mode overrides for new internship layout */
+.hybrid .hf-intern-cta h3 {
+  font-family: var(--font-archivo-black, "Archivo Black"), sans-serif;
+  text-transform: uppercase; font-size: 44px;
+}
+.hybrid .hf-intern-cta h3 em {
+  font-family: var(--font-instrument-serif, "Instrument Serif"), Georgia, serif;
+  text-transform: lowercase;
+}
+
+@media (max-width: 768px) {
+  .intern-top { grid-template-columns: 1fr; gap: 28px }
+  .intern-top .right { aspect-ratio: 4/5 }
+  .intern-bottom p { font-size: 17px }
+  .hybrid .hf-intern-cta h3 { font-size: 30px }
+}
+
+/* ── Promo section — smaller heading, bold first part ────────── */
+.hf-promo .hd h3 { font-size: 36px }
+.hf-promo .hd h3 strong { font-weight: 800 }
+.hybrid .hf-promo .hd h3 { font-size: 30px }
+@media (max-width: 768px) { .hf-promo .hd h3 { font-size: 24px } }
+
+/* ── Apply prompt (above apply cards) ───────────────────────── */
+.apply-prompt {
+  font-family: var(--hf-display);
+  font-style: italic;
+  font-size: 26px;
+  text-align: center;
+  color: var(--hf-ink);
+  margin: 0 0 28px;
+  letter-spacing: -.01em;
+}
+.hybrid .apply-prompt {
+  font-family: var(--font-instrument-serif, "Instrument Serif"), Georgia, serif;
+}
+
+/* ── InternRevealCard — image-to-video cross-fade ────────────── */
+.irc-pic { position: relative }
+.irc-img {
+  position: absolute; inset: 0;
+  width: 100%; height: 100%;
+  object-fit: contain; object-position: center;
+  display: block;
+  z-index: 2;
+  transition: opacity .9s ease;
+  background: var(--hf-card);
+}
+.irc-img--fade { opacity: 0 }
+.irc-vid {
+  position: absolute; inset: 0;
+  width: 100%; height: 100%;
+  object-fit: cover;
+  display: block;
+  opacity: 0;
+  transition: opacity .9s ease;
+  z-index: 1;
+}
+.irc-vid--visible { opacity: 1 }
+
+/* ── Workplace collage (4-item varied layout) ────────────────── */
+.wc-collage {
+  display: grid;
+  grid-template-columns: 1.5fr 1fr 1fr;
+  grid-template-rows: 220px 220px;
+  gap: 10px;
+  border-radius: 18px;
+  overflow: hidden;
+}
+/* Photo (item 0): tall left tile */
+.wc-tile--0 { grid-column: 1; grid-row: 1 / 3 }
+/* Video 1: top-middle */
+.wc-tile--1 { grid-column: 2; grid-row: 1 }
+/* Video 2: top-right */
+.wc-tile--2 { grid-column: 3; grid-row: 1 }
+/* Video 3: wide bottom spanning cols 2-3 */
+.wc-tile--3 { grid-column: 2 / 4; grid-row: 2 }
+
+.wc-tile {
+  border-radius: 12px;
+  overflow: hidden;
+  position: relative;
+  background: var(--hf-surface);
+}
+.wc-media {
+  width: 100%; height: 100%;
+  object-fit: cover; display: block;
+}
+
+@media (max-width: 768px) {
+  .wc-collage {
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 180px 180px 180px;
+  }
+  .wc-tile--0 { grid-column: 1 / 3; grid-row: 1 }
+  .wc-tile--1 { grid-column: 1; grid-row: 2 }
+  .wc-tile--2 { grid-column: 2; grid-row: 2 }
+  .wc-tile--3 { grid-column: 1 / 3; grid-row: 3 }
+}
+
+/* ── Cohort One — sub-headings per movement ──────────────────── */
+.c1-movement__sub {
+  font-size: 15px; line-height: 1.6; color: var(--hf-ink-2);
+  margin: -12px 0 24px;
+}
+.c1-beyond-copy {
+  font-size: 18px; line-height: 1.65; color: var(--hf-ink);
+  margin: 0 0 32px;
+}
+.c1-beyond-copy strong { font-weight: 700 }

@@ -5,6 +5,7 @@ import { Marquee } from '@/components/Marquee'
 import { HfImg } from '@/components/HfImg'
 import { HeroWordSwap } from '@/components/HeroWordSwap'
 import { PromoSection } from '@/components/PromoSection'
+import { HeroAutoVideo } from '@/components/HeroAutoVideo'
 import { PILLARS, GRAM_STRIP } from '@/data/home'
 import { APPLY_URL } from '@/data/links'
 
@@ -13,7 +14,7 @@ export default function HomePage() {
     <>
       <Nav />
 
-      {/* Hero — content padded via hf-c */}
+      {/* Hero */}
       <section className="hf-hero">
         <span className="hf-blob b1" />
         <span className="hf-blob b2" />
@@ -36,7 +37,7 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* Hero photo — full-bleed, crop toward bottom to show heads */}
+      {/* Hero photo */}
       <section className="hf-photo">
         <div className="img">
           <HfImg src="/assets/homepage-hero.jpg" alt="In-person event · our community" pos="center 20%" />
@@ -74,7 +75,7 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* Marquee — full-bleed, no container */}
+      {/* Marquee */}
       <Marquee />
 
       {/* Pillars */}
@@ -97,17 +98,28 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* Promo + gallery — hf-c lives inside PromoSection */}
-      <PromoSection />
-
-      {/* Internship CTA — two-column layout */}
+      {/* ── Internship CTA — MOVED ABOVE glimpse ─────────────── */}
       <section className="hf-intern-cta">
         <div className="hf-c">
-          <div className="left">
-            <div className="chip-acc">UC Internship · cohort 02 open</div>
-            <h3>ready to get real <em>experience?</em></h3>
+          {/* Top: text left, Our Story video right */}
+          <div className="intern-top">
+            <div className="left">
+              <div className="chip-acc">UC Internship · cohort 02 open</div>
+              <h3>ready to get real <em>experience?</em></h3>
+              <p className="intern-top-sub">
+                Hear from our founder more about what you can expect from the internship.
+              </p>
+            </div>
+            <div className="right">
+              <HeroAutoVideo
+                poster="/assets/intern-hero.jpg"
+                src="/assets/our-story-video.MP4"
+                alt="Our Story — Osarhieme on the UC internship"
+              />
+            </div>
           </div>
-          <div className="right" style={{ display: 'flex', flexDirection: 'column', gap: 20, alignItems: 'center', textAlign: 'center' }}>
+          {/* Bottom: centered bold text + button */}
+          <div className="intern-bottom">
             <p>
               A 12-week paid placement inside a founder-led organisation — with training,
               mentorship and a cohort that becomes your network for life.
@@ -119,14 +131,17 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* Founder quote — full-bleed dark, content padded */}
+      {/* ── Glimpse into our community — now below internship ─── */}
+      <PromoSection />
+
+      {/* Founder quote */}
       <section className="hf-quote">
         <div className="hf-c">
           <q>
-            igniting lives <em>one life at a time</em> is our goal — and we are committed to
+            Igniting lives one life at a time is our goal — and we are committed to
             empowering young leaders and pioneers in their respective fields and endeavours.
           </q>
-          <div className="who">— Osarhieme · founder, uncovered conversations</div>
+          <div className="who">— Osarhieme · Founder, Uncovered Conversations</div>
         </div>
       </section>
 

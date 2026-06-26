@@ -1,6 +1,6 @@
 import { Nav } from '@/components/Nav'
 import { Footer } from '@/components/Footer'
-import { HfImg } from '@/components/HfImg'
+import { HeroAutoVideo } from '@/components/HeroAutoVideo'
 import { CohortOneSection } from '@/components/CohortOneSection'
 import { STEPS, PARTNERS } from '@/data/internship'
 import { APPLY_URL, PARTNER_FORM } from '@/data/links'
@@ -40,14 +40,19 @@ export default function InternshipPage() {
                 </div>
               </div>
             </div>
+            {/* Hero: Our Story video — plays on hover or after 5 s; contains to native ratio */}
             <div className="photo">
-              <HfImg src="/assets/intern-hero.jpg" alt="UC internship · in session" pos="center 30%" />
+              <HeroAutoVideo
+                poster="/assets/intern-hero.jpg"
+                src="/assets/our-story-video.MP4"
+                alt="UC internship · our story"
+              />
             </div>
           </div>
         </div>
       </section>
 
-      {/* Partner logos — hd padded, marquee full-bleed */}
+      {/* Partner logos */}
       <section className="hf-logos">
         <div className="hf-c">
           <div className="hd">
@@ -92,20 +97,14 @@ export default function InternshipPage() {
         </div>
       </section>
 
-      {/* Quote */}
-      <section className="hf-quote">
-        <div className="hf-c">
-          <q>3 words to describe the internship: <em>intentional, supportive</em> and very insightful.</q>
-          <div className="who">— Ronke · cohort 01 intern</div>
-        </div>
-      </section>
-
-      {/* Inside Cohort One — replaces standalone Hall of Fame */}
+      {/* Inside Cohort One */}
       <CohortOneSection />
 
       {/* Apply or partner */}
       <section className="hf-apply">
         <div className="hf-c">
+          {/* Apply prompt */}
+          <p className="apply-prompt">Want to be a part of the UC internship experience?</p>
           <div className="grid">
             <div className="card">
               <div className="chip">For interns</div>

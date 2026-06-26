@@ -35,7 +35,7 @@ export const OPTIONS: Option[] = [
     ],
     commit: '6-week commitment · flexible extension',
     cta: 'Host an intern',
-    mailto: 'mailto:admin@uncoveredconversations.com?subject=Internship%20Host%20Interest%20-%20%5BCompany%20Name%5D',
+    mailto: 'https://docs.google.com/forms/d/e/1FAIpQLSfvr5B1RnkoMQBBszJfLQ6W8qoJuzi30Cnt9TTG9H8t3VBteg/viewform',
   },
   {
     num: '02', t: 'Workshop Host or Collaborator',
@@ -99,7 +99,7 @@ export const TESTIMONIALS: Testimonial[] = [
   {
     pull: 'To contribute to the growth of the intern and to know if the intern would be a great addition to our team.',
     body: 'It allowed delegation of more tasks that usually would be left, to focus on priorities.',
-    company: 'Sapphire',
+    company: 'SBO',
     logo: '/assets/partner-sbo.jpg',
   },
   {
