@@ -51,7 +51,7 @@ export default function InternshipPage() {
       <section className="hf-logos">
         <div className="hf-c">
           <div className="hd">
-            <div className="lbl">Partner brands</div>
+            <div className="lbl">Trusted by</div>
             <div className="lbl">{PARTNERS.length} orgs · growing</div>
           </div>
         </div>

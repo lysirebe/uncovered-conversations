@@ -18,10 +18,13 @@ export const GALLERY: GalleryPhoto[] = [
   { src: '/assets/event-14.JPG',     caption: 'Building You As You Build · Lagos' },
 ]
 
-// Instagram-style strip — ip-* in-person shots
+// Instagram strip — event- images ordered for visual variety
 export const GRAM_STRIP = [
-  '/assets/ip-3.jpg', '/assets/ip-5.jpg', '/assets/ip-6.jpg',
-  '/assets/ip-7.jpg', '/assets/ip-extra.jpg',
+  '/assets/event-3jpg.jpg',
+  '/assets/event-8.JPG',
+  '/assets/event-12.jpg',
+  '/assets/event-4.jpg',
+  '/assets/event-14.JPG',
 ]
 
 export const PROMO_PHOTO = '/assets/homepage-video-thumbnail.jpg'

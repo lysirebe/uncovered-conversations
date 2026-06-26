@@ -2203,3 +2203,65 @@ html, body { margin: 0; padding: 0 }
   .c1-bridge { padding: 32px 28px }
   .c1-bridge p { font-size: 18px }
 }
+
+/* ── About page hero video ───────────────────────────────────── */
+.about-hero-vid-wrap {
+  width: 100%;
+  border-radius: 20px;
+  overflow: hidden;
+  position: relative;
+}
+/* Thumbnail state — matches .hf-phero .photo proportions */
+.about-hero-vid-wrap:not(.about-hero-vid-wrap--playing) {
+  aspect-ratio: 5/6;
+}
+.about-hero-vid__thumb {
+  position: absolute; inset: 0;
+  cursor: pointer;
+}
+.about-hero-vid__thumb img {
+  width: 100%; height: 100%;
+  object-fit: cover; object-position: center 30%;
+  display: block;
+}
+.about-hero-vid__overlay {
+  position: absolute; inset: 0;
+  display: flex; align-items: center; justify-content: center;
+  background: rgba(12,14,19,.28);
+  transition: background .2s ease;
+}
+.about-hero-vid__thumb:hover .about-hero-vid__overlay { background: rgba(12,14,19,.40) }
+.about-hero-vid__play-btn {
+  width: 76px; height: 76px; border-radius: 50%;
+  background: rgba(255,255,255,.94); color: var(--hf-ink);
+  display: flex; align-items: center; justify-content: center;
+  padding-left: 5px;
+  box-shadow: 0 14px 36px -10px rgba(0,0,0,.45);
+  transition: transform .2s ease;
+}
+.about-hero-vid__thumb:hover .about-hero-vid__play-btn { transform: scale(1.08) }
+
+/* Playing state — flex container, video at native aspect ratio */
+.about-hero-vid-wrap--playing {
+  background: #111;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 320px;
+  aspect-ratio: auto;
+}
+.about-hero-vid__video {
+  max-height: 80vh;
+  max-width: 100%;
+  width: auto;
+  height: auto;
+  display: block;
+}
+.about-hero-vid__close {
+  position: absolute; top: 12px; right: 12px; z-index: 2;
+  width: 36px; height: 36px; border-radius: 50%; border: 0;
+  background: rgba(255,255,255,.18); color: #fff; font-size: 20px;
+  cursor: pointer; display: flex; align-items: center; justify-content: center;
+  transition: background .15s;
+}
+.about-hero-vid__close:hover { background: var(--hf-acc) }

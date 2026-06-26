@@ -101,7 +101,10 @@ export default function PartnershipsPage() {
             {TESTIMONIALS.map((t, i) => (
               <div className={`tcard${t.feature ? ' feature' : ''}`} key={i}>
                 <div className="pull"><span className="mark">&ldquo;</span>{t.pull}</div>
-                <p>{t.body}</p>
+                {t.bodyHtml
+                  ? <p dangerouslySetInnerHTML={{ __html: t.bodyHtml }} />
+                  : <p>{t.body}</p>
+                }
                 <div className="tcard-logo">
                   {t.logo && (
                     // eslint-disable-next-line @next/next/no-img-element

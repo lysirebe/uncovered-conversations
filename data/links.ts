@@ -4,6 +4,5 @@ export const VOLUNTEER_URL = 'https://forms.gle/X3B2eNnofB8RBeJA9'
 export const BOOK_A_CALL  = 'https://calendar.app.google/jpXEE58xCB7UNMa1A'
 export const CONTACT_EMAIL = 'mailto:admin@uncoveredconversations.com'
 
-// Opportunities page forms — replace # with the real form URLs when ready
-export const FOUNDER_OPPS_FORM = '#'  // TODO: link to the "submit a role" form
-export const SEEKER_OPPS_FORM  = '#'  // TODO: link to the "join talent list" form
+export const FOUNDER_OPPS_FORM = 'https://forms.gle/ewZCQHi9UNh7Y51G7'
+export const SEEKER_OPPS_FORM  = 'https://forms.gle/BDY6dcv3zajEwAr69'
