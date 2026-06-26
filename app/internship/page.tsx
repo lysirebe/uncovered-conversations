@@ -1,7 +1,7 @@
 import { Nav } from '@/components/Nav'
 import { Footer } from '@/components/Footer'
 import { HfImg } from '@/components/HfImg'
-import { HallOfFame } from '@/components/HallOfFame'
+import { CohortOneSection } from '@/components/CohortOneSection'
 import { STEPS, PARTNERS } from '@/data/internship'
 import { APPLY_URL, PARTNER_FORM } from '@/data/links'
 
@@ -100,8 +100,8 @@ export default function InternshipPage() {
         </div>
       </section>
 
-      {/* Hall of Fame */}
-      <HallOfFame />
+      {/* Inside Cohort One — replaces standalone Hall of Fame */}
+      <CohortOneSection />
 
       {/* Apply or partner */}
       <section className="hf-apply">
