@@ -1,15 +1,20 @@
 import type { GalleryItem } from '@/data/cohort'
 
-interface Props {
-  items: GalleryItem[]
-}
+interface Props { items: GalleryItem[] }
 
-// Static mixed-size collage. Videos autoplay muted + looping.
+// Collage layout (slot-mapped):
+// ┌─────────┬───────┬─────────┐
+// │         │  [1]  │         │
+// │   [0]   ├───────┤   [3]   │
+// │         │  [2]  │         │
+// └─────────┴───────┴─────────┘
 export function WorkplaceCollage({ items }: Props) {
+  const sorted = [...items].sort((a, b) => a.slot - b.slot)
+
   return (
     <div className="wc-collage">
-      {items.map((item, i) => (
-        <div key={i} className={`wc-tile wc-tile--${i}`}>
+      {sorted.map((item, i) => (
+        <div key={i} className={`wc-tile wc-tile--${item.slot}`}>
           {item.type === 'video' ? (
             <video
               src={item.src}
@@ -18,11 +23,10 @@ export function WorkplaceCollage({ items }: Props) {
               playsInline
               loop
               className="wc-media"
-              aria-label={item.caption}
             />
           ) : (
             // eslint-disable-next-line @next/next/no-img-element
-            <img src={item.src} alt={item.caption} className="wc-media" />
+            <img src={item.src} alt="" className="wc-media" />
           )}
         </div>
       ))}

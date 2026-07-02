@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useRef, useEffect } from 'react'
+import { useRef } from 'react'
 import type { SpotlightIntern } from '@/data/internship'
 
 interface Props {
@@ -8,55 +8,53 @@ interface Props {
   onClick: () => void
 }
 
-// On scroll into view, shows still image for ~2 seconds then cross-fades to muted video.
-// Clicking still opens the full lightbox.
+// Shows still image blended with first video frame as cover.
+// On hover: muted video plays as preview.
+// On click: opens full lightbox.
 export function InternRevealCard({ spotlight, onClick }: Props) {
-  const [showVideo, setShowVideo] = useState(false)
-  const cardRef = useRef<HTMLButtonElement>(null)
-  const timerRef = useRef<ReturnType<typeof setTimeout> | undefined>(undefined)
+  const videoRef = useRef<HTMLVideoElement>(null)
 
-  useEffect(() => {
+  function handleMouseEnter() {
     if (!spotlight.videoSrc) return
-
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          timerRef.current = setTimeout(() => setShowVideo(true), 2000)
-        } else {
-          if (timerRef.current) clearTimeout(timerRef.current)
-        }
-      },
-      { threshold: 0.4 }
-    )
-
-    const el = cardRef.current
-    if (el) observer.observe(el)
-    return () => {
-      observer.disconnect()
-      if (timerRef.current) clearTimeout(timerRef.current)
-    }
-  }, [spotlight.videoSrc])
+    const v = videoRef.current
+    if (v) { v.muted = true; v.play().catch(() => {}) }
+  }
+  function handleMouseLeave() {
+    if (!spotlight.videoSrc) return
+    const v = videoRef.current
+    if (v) { v.pause(); v.currentTime = 0 }
+  }
 
   return (
-    <button ref={cardRef} className="fcard" onClick={onClick} title={spotlight.name}>
+    <button
+      className="fcard"
+      onClick={onClick}
+      title={spotlight.name}
+      onMouseEnter={handleMouseEnter}
+      onMouseLeave={handleMouseLeave}
+    >
       <div className="pic irc-pic">
-        {/* Still image — fades out after video starts */}
-        {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img
-          src={spotlight.photo}
-          alt={spotlight.short}
-          className={`irc-img${showVideo && spotlight.videoSrc ? ' irc-img--fade' : ''}`}
-        />
-        {/* Muted preview video — fades in after 2 s in view */}
+        {/* Video layer — plays as muted preview on hover */}
         {spotlight.videoSrc && (
           <video
+            ref={videoRef}
             src={spotlight.videoSrc}
-            autoPlay={showVideo}
-            muted
             playsInline
+            muted
             loop
-            className={`irc-vid${showVideo ? ' irc-vid--visible' : ''}`}
+            className="irc-vid"
           />
+        )}
+        {/* Still image — semi-transparent on hover via CSS */}
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img src={spotlight.photo} alt={spotlight.short} className="irc-img" />
+        {/* Play badge */}
+        {spotlight.video && (
+          <span className="irc-play">
+            <svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor" aria-hidden="true">
+              <path d="M8 5v14l11-7z" />
+            </svg>
+          </span>
         )}
         <span className="look">{spotlight.video ? '▶ Watch' : 'View ↗'}</span>
       </div>

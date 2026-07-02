@@ -2,7 +2,6 @@ import Link from 'next/link'
 import { Nav } from '@/components/Nav'
 import { Footer } from '@/components/Footer'
 import { HfImg } from '@/components/HfImg'
-import { AboutHeroVideo } from '@/components/AboutHeroVideo'
 import { TeamSection } from '@/components/TeamSection'
 import { MILESTONES, VALUES } from '@/data/about'
 import { VOLUNTEER_URL } from '@/data/links'
@@ -32,7 +31,9 @@ export default function AboutPage() {
                 resources their growth depends on.
               </p>
             </div>
-            <AboutHeroVideo />
+            <div className="photo">
+              <HfImg src="/assets/about-page-hero.jpg" alt="Uncovered Conversations · in person" pos="center 30%" />
+            </div>
           </div>
         </div>
       </section>

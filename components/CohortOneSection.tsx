@@ -4,14 +4,17 @@ import { useState } from 'react'
 import { InternRevealCard } from './InternRevealCard'
 import { WorkplaceCollage } from './WorkplaceCollage'
 import { InternLightbox } from './InternLightbox'
+import { SpeakerModal } from './SpeakerModal'
 import { SPOTLIGHT } from '@/data/internship'
 import { INTERN_GALLERY, SPEAKERS } from '@/data/cohort'
 import type { SpotlightIntern } from '@/data/internship'
+import type { Speaker } from '@/data/cohort'
 
 const TRIPLED_SPEAKERS = [...SPEAKERS, ...SPEAKERS, ...SPEAKERS]
 
 export function CohortOneSection() {
   const [intern, setIntern] = useState<SpotlightIntern | null>(null)
+  const [speaker, setSpeaker] = useState<Speaker | null>(null)
 
   return (
     <>
@@ -40,16 +43,19 @@ export function CohortOneSection() {
             <p className="c1-movement__sub">
               Learn more about those who took part in the UC internship experience.
             </p>
-            <div className="c1-intern-row">
-              {SPOTLIGHT.map((s) => (
-                <InternRevealCard
-                  key={s.short}
-                  spotlight={s}
-                  onClick={() => setIntern(s)}
-                />
-              ))}
-            </div>
           </div>
+        </div>
+
+        {/* Intern portrait marquee — full-bleed scrolling */}
+        <div className="fame-marquee c1-intern-marquee">
+          <div className="ftrack">
+            {[...SPOTLIGHT, ...SPOTLIGHT, ...SPOTLIGHT].map((s, i) => (
+              <InternRevealCard key={i} spotlight={s} onClick={() => setIntern(s)} />
+            ))}
+          </div>
+        </div>
+
+        <div className="hf-c">
 
           {/* ── 2. In the workplace ────────────────────────── */}
           <div className="c1-movement">
@@ -66,6 +72,15 @@ export function CohortOneSection() {
             <WorkplaceCollage items={INTERN_GALLERY} />
           </div>
 
+          {/* ── Bridge copy — centered ──────────────────────── */}
+          <div className="c1-bridge-center">
+            <p>
+              Our interns didn&apos;t just learn from the companies they joined. We made sure
+              they were equipped beyond the desk too — with sessions, speakers and mentors
+              brought in by UC. The full package.
+            </p>
+          </div>
+
           {/* ── 3. Beyond the desk ─────────────────────────── */}
           <div className="c1-movement">
             <div className="c1-movement__hd">
@@ -75,26 +90,25 @@ export function CohortOneSection() {
                 <h3 className="c1-movement__title">Beyond the desk.</h3>
               </div>
             </div>
-            <p className="c1-beyond-copy">
-              <strong>
-                Our interns didn&apos;t just learn from the companies they joined. We made sure
-                they were equipped beyond the desk too — with sessions, speakers and mentors
-                brought in by UC. The full package.
-              </strong>
-            </p>
           </div>
         </div>
 
-        {/* Speakers marquee — full-bleed */}
+        {/* Speakers marquee — full-bleed, click opens modal */}
         <div className="fame-marquee c1-speakers-marquee">
           <div className="ftrack">
             {TRIPLED_SPEAKERS.map((s, i) => (
-              <div className="fcard c1-speaker-card" key={i}>
+              <button
+                key={i}
+                className="fcard c1-speaker-card"
+                onClick={() => setSpeaker(s)}
+                title={s.name}
+              >
                 <div className="pic">
                   {/* eslint-disable-next-line @next/next/no-img-element */}
                   <img src={s.src} alt={s.name} />
+                  <span className="look">View ↗</span>
                 </div>
-              </div>
+              </button>
             ))}
           </div>
         </div>
@@ -102,6 +116,7 @@ export function CohortOneSection() {
       </section>
 
       <InternLightbox intern={intern} onClose={() => setIntern(null)} />
+      <SpeakerModal speaker={speaker} onClose={() => setSpeaker(null)} />
     </>
   )
 }

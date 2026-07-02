@@ -90,21 +90,20 @@ export interface Testimonial {
 
 export const TESTIMONIALS: Testimonial[] = [
   {
-    pull: 'We were motivated to partake in hosting interns because we believe in developing young talent and providing practical industry exposure to students and recent graduates.',
-    bodyHtml: 'Hosting an intern gave us <strong>fresh perspectives and innovative ideas</strong>, as interns often bring new approaches to problem-solving. The experience allowed us to identify potential future talent while contributing to the intern\'s professional growth, which aligns with our commitment to capacity building and knowledge sharing.',
-    company: 'Arami',
-    logo: '/assets/partner-arami.jpg',
+    pull: 'To contribute to the growth of the intern and to know if the intern would be a great addition to our team.',
+    body: 'Delegation of more tasks that usually would be left, to focus on priorities.',
+    company: 'SBO',
+    logo: '/assets/partner-sbo.jpg',
     feature: true,
   },
   {
-    pull: 'To contribute to the growth of the intern and to know if the intern would be a great addition to our team.',
-    body: 'It allowed delegation of more tasks that usually would be left, to focus on priorities.',
-    company: 'SBO',
-    logo: '/assets/partner-sbo.jpg',
+    pull: 'We were motivated to partake in hosting interns because we believe in developing young talent and providing practical industry exposure to students and recent graduates.',
+    body: 'Hosting an intern gave us fresh perspectives and innovative ideas, as interns often bring new approaches to problem-solving. The experience allowed us to identify potential future talent while contributing to the intern\'s professional growth, which aligns with our commitment to capacity building and knowledge sharing.',
+    company: 'Arami',
+    logo: '/assets/partner-arami.jpg',
   },
   {
     pull: 'I think the opportunity to participate in UC\'s vision to provide experiences and opportunities to young people in Nigeria — an opportunity younger me would definitely have appreciated.',
-    bodyHtml: 'It provided a different perspective and <strong>taught us a lot more about teamwork.</strong>',
     company: 'SBO',
     logo: '/assets/partner-sbo.jpg',
   },

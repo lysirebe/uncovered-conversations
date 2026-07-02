@@ -24,11 +24,9 @@ export default function HomePage() {
             <span style={{ display: 'inline-block', fontFamily: 'var(--font-instrument-serif, "Instrument Serif"), Georgia, serif', fontStyle: 'italic', fontSize: '0.42em', color: 'var(--hf-acc)', letterSpacing: '.01em', textTransform: 'none', marginBottom: 14, lineHeight: 1 }}>
               uncovered conversations
             </span>
-            <br />
-            we are <br />
+            <br />we are <br />
             <HeroWordSwap />
-            <br />
-            young individuals.
+            <br />young individuals.
           </h1>
           <div className="tag">igniting one life at a time</div>
           <div className="ctas">
@@ -75,7 +73,6 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* Marquee */}
       <Marquee />
 
       {/* Pillars */}
@@ -98,19 +95,24 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* ── Internship CTA — MOVED ABOVE glimpse ─────────────── */}
+      {/* ── Internship section — internship text left, small video right ── */}
       <section className="hf-intern-cta">
         <div className="hf-c">
-          {/* Top: text left, Our Story video right */}
           <div className="intern-top">
+            {/* Left: heading + placement copy */}
             <div className="left">
               <div className="chip-acc">UC Internship · cohort 02 open</div>
               <h3>ready to get real <em>experience?</em></h3>
+              <p className="intern-top-placement">
+                A 12-week paid placement inside a founder-led organisation — with training,
+                mentorship and a cohort that becomes your network for life.
+              </p>
               <p className="intern-top-sub">
                 Hear from our founder more about what you can expect from the internship.
               </p>
             </div>
-            <div className="right">
+            {/* Right: Our Story video — SMALL (matches old internship size) */}
+            <div className="intern-video-sm">
               <HeroAutoVideo
                 poster="/assets/intern-hero.jpg"
                 src="/assets/our-story-video.MP4"
@@ -118,12 +120,8 @@ export default function HomePage() {
               />
             </div>
           </div>
-          {/* Bottom: centered bold text + button */}
+          {/* Centred apply button */}
           <div className="intern-bottom">
-            <p>
-              A 12-week paid placement inside a founder-led organisation — with training,
-              mentorship and a cohort that becomes your network for life.
-            </p>
             <a className="hf-btn acc" href={APPLY_URL} target="_blank" rel="noopener noreferrer">
               Apply now <span className="arr">→</span>
             </a>
@@ -131,15 +129,16 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* ── Glimpse into our community — now below internship ─── */}
+      {/* Glimpse into our community */}
       <PromoSection />
 
       {/* Founder quote */}
       <section className="hf-quote">
         <div className="hf-c">
           <q>
-            Igniting lives one life at a time is our goal — and we are committed to
-            empowering young leaders and pioneers in their respective fields and endeavours.
+            <strong>Igniting lives one life at a time is our goal</strong>{' '}
+            — and we are committed to empowering young leaders and pioneers in their
+            respective fields and endeavours.
           </q>
           <div className="who">— Osarhieme · Founder, Uncovered Conversations</div>
         </div>

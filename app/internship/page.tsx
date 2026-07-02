@@ -12,7 +12,7 @@ export default function InternshipPage() {
     <>
       <Nav />
 
-      {/* Hero */}
+      {/* Hero — text left, LARGE Our Story video right */}
       <section className="hf-phero hf-int-hero">
         <span className="hf-blob b1" />
         <div className="hf-c">
@@ -40,13 +40,16 @@ export default function InternshipPage() {
                 </div>
               </div>
             </div>
-            {/* Hero: Our Story video — plays on hover or after 5 s; contains to native ratio */}
-            <div className="photo">
-              <HeroAutoVideo
-                poster="/assets/intern-hero.jpg"
-                src="/assets/our-story-video.MP4"
-                alt="UC internship · our story"
-              />
+            {/* LARGE video (1fr 1fr grid on internship page) */}
+            <div className="int-hero-video">
+              <div className="int-hero-video-player">
+                <HeroAutoVideo
+                  poster="/assets/intern-hero.jpg"
+                  src="/assets/our-story-video.MP4"
+                  alt="UC internship · our story"
+                />
+              </div>
+              <p className="int-video-cta">↑ Press play to hear our founder speak on the internship programme.</p>
             </div>
           </div>
         </div>
@@ -103,7 +106,6 @@ export default function InternshipPage() {
       {/* Apply or partner */}
       <section className="hf-apply">
         <div className="hf-c">
-          {/* Apply prompt */}
           <p className="apply-prompt">Want to be a part of the UC internship experience?</p>
           <div className="grid">
             <div className="card">

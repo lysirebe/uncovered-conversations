@@ -364,7 +364,7 @@ html, body { margin: 0; padding: 0 }
   display: block; max-width: 820px; margin: 0 auto 22px;
 }
 .hf-quote q em { color: var(--hf-acc); font-style: italic }
-.hf-quote .who { font: 500 11px/1 var(--hf-grot); letter-spacing: .18em; text-transform: uppercase; color: rgba(255,255,255,.6) }
+.hf-quote .who { font: 500 13px/1.4 var(--hf-grot); letter-spacing: .06em; color: rgba(255,255,255,.65) }
 
 /* ── Instagram strip ─────────────────────────────────────────── */
 .hf-gram { padding: 60px 0 }
@@ -636,10 +636,14 @@ html, body { margin: 0; padding: 0 }
 .hybrid .hf-int-hero h1 { font-size: 80px }
 .hf-int-hero .body p { font-size: 17px; line-height: 1.7 }
 .hf-int-hero h1 { margin-bottom: 14px }
-.hf-int-hero .int-hero-grid { display: grid; grid-template-columns: 1.7fr .65fr; gap: 40px; align-items: start; margin-top: 18px }
+.hf-int-hero .int-hero-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; align-items: start; margin-top: 18px }
 .hf-int-hero .int-left { min-width: 0 }
 .hf-int-hero .body p:first-child { margin-top: 0 }
 .hf-int-hero .photo { align-self: start; aspect-ratio: 4/5; width: 100%; position: relative; border-radius: 20px; overflow: hidden }
+/* Large Our Story video — right column of internship hero grid */
+.int-hero-video { display: flex; flex-direction: column; gap: 10px; align-self: start }
+.int-hero-video-player { position: relative; aspect-ratio: 4/5; border-radius: 20px; overflow: hidden; width: 100% }
+.int-video-cta { font: 500 12px/1.4 var(--hf-grot); letter-spacing: .04em; color: var(--hf-muted); text-align: center; margin: 0; padding: 0 8px }
 
 /* ── Partner logo marquee ─────────────────────────────────────── */
 .hf-logos { padding: 30px 0; background: var(--hf-bg); border-top: 1px solid var(--hf-line); border-bottom: 1px solid var(--hf-line) }
@@ -1070,10 +1074,13 @@ html, body { margin: 0; padding: 0 }
   font-family: var(--font-instrument-serif, "Instrument Serif"), Georgia, serif; font-style: italic; text-transform: lowercase; color: var(--hf-acc);
 }
 .hybrid .hf-quote q {
-  font-family: var(--font-archivo-black, "Archivo Black"), sans-serif; font-weight: 400; font-style: normal; text-transform: uppercase; font-size: 32px; letter-spacing: -.02em; line-height: 1.15;
+  font-family: var(--font-instrument-serif, "Instrument Serif"), Georgia, serif;
+  font-style: italic; font-weight: 400;
+  text-transform: none; font-size: 32px; letter-spacing: -.01em; line-height: 1.3;
 }
-.hybrid .hf-quote q em {
-  font-family: var(--font-instrument-serif, "Instrument Serif"), Georgia, serif; font-style: italic; text-transform: lowercase; color: var(--hf-acc);
+.hybrid .hf-quote q strong {
+  font-family: var(--font-archivo-black, "Archivo Black"), sans-serif;
+  font-style: normal; font-weight: 400; text-transform: none;
 }
 .hybrid .hf-quote::before, .hybrid .hf-quote::after {
   font-family: var(--font-instrument-serif, "Instrument Serif"), Georgia, serif;
@@ -1411,7 +1418,7 @@ html, body { margin: 0; padding: 0 }
   position: relative;
   overflow: hidden;
 }
-.hf-intern-cta .hf-c { display: grid; grid-template-columns: 1fr 1fr; gap: 48px; align-items: center }
+.hf-intern-cta .hf-c { display: flex; flex-direction: column; gap: 36px }
 .hf-intern-cta::before {
   content: "";
   position: absolute; inset: 0;
@@ -1427,11 +1434,15 @@ html, body { margin: 0; padding: 0 }
   margin: 0; line-height: 1; letter-spacing: -.025em;
 }
 .hf-intern-cta h3 em { font-style: italic; color: var(--hf-acc) }
-.hf-intern-cta .right p {
-  font-size: 20px; line-height: 1.5; color: var(--hf-ink);
-  font-weight: 700; margin: 0 0 24px;
-  font-family: var(--hf-grot);
-}
+/* intern-top: two-col grid (left text + right small video) */
+.intern-top { display: grid; grid-template-columns: 1fr 380px; gap: 48px; align-items: start }
+.intern-top .left { display: flex; flex-direction: column; gap: 14px }
+.intern-top-placement { font-size: 17px; line-height: 1.65; color: var(--hf-ink-2); margin: 0; font-weight: 500 }
+.intern-top-sub { font-size: 14.5px; line-height: 1.6; color: var(--hf-muted); margin: 0 }
+/* Small video container — right side of intern-top */
+.intern-video-sm { position: relative; aspect-ratio: 4/5; border-radius: 20px; overflow: hidden; width: 100% }
+/* Apply button centred below intern-top */
+.intern-bottom { text-align: center; padding-top: 4px }
 .hybrid .hf-intern-cta h3 {
   font-family: var(--font-archivo-black, "Archivo Black"), sans-serif;
   text-transform: uppercase; font-size: 44px;
@@ -1554,7 +1565,7 @@ html, body { margin: 0; padding: 0 }
 
 /* ── Internship CTA — two-column responsive collapse ─────────── */
 @media (max-width: 768px) {
-  .hf-intern-cta .hf-c { grid-template-columns: 1fr }
+  .intern-top { grid-template-columns: 1fr }
   .res-grid--sm { grid-template-columns: repeat(2, 1fr) }
   .hf-conv-grid .grid--s2 { grid-template-columns: repeat(2, 1fr) }
   .res-coming-soon { padding: 48px 24px }
@@ -2027,6 +2038,7 @@ html, body { margin: 0; padding: 0 }
 /* ── Movement blocks ───────────────────────────────────────────── */
 .c1-movement { margin-bottom: 56px }
 .c1-movement:last-of-type { margin-bottom: 32px }
+.c1-movement__sub { font-size: 15px; line-height: 1.6; color: var(--hf-ink-2); margin: -12px 0 24px; text-align: center }
 
 .c1-movement__hd {
   display: flex; align-items: center; gap: 18px;
@@ -2154,29 +2166,16 @@ html, body { margin: 0; padding: 0 }
 .c1-dot.active { background: var(--hf-acc); transform: scale(1.3) }
 
 /* ── Bridge copy ───────────────────────────────────────────────── */
-.c1-bridge {
-  background: var(--hf-surface);
-  border-radius: 24px;
-  padding: 44px 52px;
+.c1-bridge-center {
   text-align: center;
-  margin-bottom: 56px;
-  position: relative;
-  overflow: hidden;
+  max-width: 600px;
+  margin: 0 auto 48px;
+  padding: 0 16px;
 }
-.c1-bridge::before {
-  content: "\201C";
-  position: absolute; left: 24px; top: 10px;
-  font-family: var(--hf-display); font-size: 100px; line-height: .7;
-  color: var(--hf-acc); opacity: .2; pointer-events: none;
-}
-.c1-bridge p {
-  font-family: var(--hf-display); font-size: 22px; line-height: 1.55;
-  color: var(--hf-ink); margin: 0; letter-spacing: -.01em;
-  position: relative; z-index: 1; max-width: 660px; margin: 0 auto;
-}
-.hybrid .c1-bridge p {
+.c1-bridge-center p {
   font-family: var(--font-instrument-serif, "Instrument Serif"), Georgia, serif;
-  font-style: italic;
+  font-style: italic; font-size: 19px; line-height: 1.65;
+  color: var(--hf-ink-2); margin: 0;
 }
 
 /* ── Speakers marquee (movement 3) ────────────────────────────── */
@@ -2184,10 +2183,8 @@ html, body { margin: 0; padding: 0 }
   margin-top: 12px;
   /* Speaker images are portrait cards (same fcard sizing as founders) */
 }
-/* Speaker cards are not clickable — pointer events off */
-.c1-speaker-card { cursor: default }
-.c1-speaker-card:hover { transform: none }
-.c1-speaker-card:hover .pic { box-shadow: 0 10px 30px -18px rgba(0,0,0,.35) }
+/* Speaker cards — clickable, opens full-image modal */
+.c1-speaker-card { cursor: pointer }
 
 /* ── Responsive ────────────────────────────────────────────────── */
 @media (max-width: 768px) {
@@ -2266,185 +2263,109 @@ html, body { margin: 0; padding: 0 }
 }
 .about-hero-vid__close:hover { background: var(--hf-acc) }
 
-/* ── HeroAutoVideo (internship hero + home internship section) ── */
+/* ═══════════════════════════════════════════════════════════════
+   HeroAutoVideo (hav) — poster + hover preview + play
+   ═══════════════════════════════════════════════════════════════ */
+/* Parent container must be position:relative with explicit dimensions */
 .hav {
   position: absolute; inset: 0;
-  border-radius: inherit;
-  overflow: hidden;
+  border-radius: inherit; overflow: hidden;
   background: var(--hf-surface);
 }
 .hav--playing { background: #111 }
-
 .hav__poster {
   position: absolute; inset: 0;
   width: 100%; height: 100%;
-  object-fit: cover; object-position: center 30%;
-  display: block;
-  transition: opacity .9s ease;
-  z-index: 2;
+  object-fit: cover; object-position: center 25%;
+  display: block; z-index: 2;
+  transition: opacity .4s ease;
 }
-.hav__poster--fade { opacity: 0 }
-
+.hav--preview .hav__poster { opacity: 0.22 }
+.hav--playing .hav__poster { opacity: 0; pointer-events: none }
 .hav__video {
   position: absolute; inset: 0;
   width: 100%; height: 100%;
-  object-fit: contain;   /* native aspect ratio — no stretching */
-  display: block;
-  opacity: 0;
-  transition: opacity .7s ease;
-  z-index: 1;
+  object-fit: cover; display: block;
+  opacity: 0; z-index: 1;
+  transition: opacity .4s ease;
 }
-.hav__video--visible { opacity: 1 }
-
-/* Container for HeroAutoVideo — must be position:relative */
-.hav-container {
-  position: relative;
-  border-radius: 20px;
-  overflow: hidden;
-  width: 100%;
+.hav--preview .hav__video,
+.hav--playing .hav__video { opacity: 1 }
+.hav--playing .hav__video { object-fit: contain }
+.hav__overlay {
+  position: absolute; inset: 0; z-index: 3;
+  display: flex; align-items: center; justify-content: center;
+  background: rgba(0,0,0,.18);
+  transition: background .2s ease;
+  cursor: pointer;
 }
-
-/* ── Home internship section — new two-part layout ──────────── */
-/* Override old 2-col grid on .hf-c */
-.hf-intern-cta .hf-c { display: flex !important; flex-direction: column; gap: 36px }
-.hf-intern-cta .hf-c::before { display: none }  /* remove radial gradient pseudo */
-
-.intern-top {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 48px;
-  align-items: start;
+.hav--preview .hav__overlay { background: rgba(0,0,0,.08) }
+.hav__overlay:hover { background: rgba(0,0,0,.34) }
+.hav__play-btn {
+  width: 72px; height: 72px; border-radius: 50%; border: 0;
+  background: rgba(255,255,255,.92); color: var(--hf-ink);
+  display: flex; align-items: center; justify-content: center;
+  padding-left: 4px;
+  box-shadow: 0 14px 36px -10px rgba(0,0,0,.45);
+  transition: transform .2s ease;
+  cursor: pointer;
 }
-.intern-top .left { display: flex; flex-direction: column; gap: 14px }
-.intern-top-sub {
-  font-size: 16px; line-height: 1.6; color: var(--hf-ink-2); margin: 0;
-}
-/* Right column: video container */
-.intern-top .right {
-  position: relative;
-  aspect-ratio: 4/5;
-  border-radius: 20px;
-  overflow: hidden;
-}
-
-.intern-bottom {
-  text-align: center;
-  display: flex; flex-direction: column; align-items: center; gap: 20px;
-}
-.intern-bottom p {
-  font-size: 20px; font-weight: 700; line-height: 1.5;
-  color: var(--hf-ink); margin: 0;
-  font-family: var(--hf-grot);
-  max-width: 560px;
-}
-
-/* Hybrid mode overrides for new internship layout */
-.hybrid .hf-intern-cta h3 {
-  font-family: var(--font-archivo-black, "Archivo Black"), sans-serif;
-  text-transform: uppercase; font-size: 44px;
-}
-.hybrid .hf-intern-cta h3 em {
-  font-family: var(--font-instrument-serif, "Instrument Serif"), Georgia, serif;
-  text-transform: lowercase;
-}
-
+.hav__overlay:hover .hav__play-btn { transform: scale(1.1) }
 @media (max-width: 768px) {
-  .intern-top { grid-template-columns: 1fr; gap: 28px }
-  .intern-top .right { aspect-ratio: 4/5 }
-  .intern-bottom p { font-size: 17px }
-  .hybrid .hf-intern-cta h3 { font-size: 30px }
+  .hav__play-btn { width: 56px; height: 56px }
 }
 
-/* ── Promo section — smaller heading, bold first part ────────── */
-.hf-promo .hd h3 { font-size: 36px }
-.hf-promo .hd h3 strong { font-weight: 800 }
-.hybrid .hf-promo .hd h3 { font-size: 30px }
-@media (max-width: 768px) { .hf-promo .hd h3 { font-size: 24px } }
-
-/* ── Apply prompt (above apply cards) ───────────────────────── */
-.apply-prompt {
-  font-family: var(--hf-display);
-  font-style: italic;
-  font-size: 26px;
-  text-align: center;
-  color: var(--hf-ink);
-  margin: 0 0 28px;
-  letter-spacing: -.01em;
-}
-.hybrid .apply-prompt {
-  font-family: var(--font-instrument-serif, "Instrument Serif"), Georgia, serif;
-}
-
-/* ── InternRevealCard — image-to-video cross-fade ────────────── */
+/* ═══════════════════════════════════════════════════════════════
+   InternRevealCard (irc) — image/video blend carousel cards
+   ═══════════════════════════════════════════════════════════════ */
 .irc-pic { position: relative }
 .irc-img {
   position: absolute; inset: 0;
   width: 100%; height: 100%;
   object-fit: contain; object-position: center;
-  display: block;
-  z-index: 2;
-  transition: opacity .9s ease;
+  display: block; z-index: 2;
+  transition: opacity .35s ease;
   background: var(--hf-card);
 }
-.irc-img--fade { opacity: 0 }
+.fcard:hover .irc-img { opacity: 0.18 }
 .irc-vid {
   position: absolute; inset: 0;
   width: 100%; height: 100%;
-  object-fit: cover;
-  display: block;
-  opacity: 0;
-  transition: opacity .9s ease;
-  z-index: 1;
+  object-fit: cover; display: block; z-index: 1;
 }
-.irc-vid--visible { opacity: 1 }
+.irc-play {
+  position: absolute; bottom: 10px; right: 10px; z-index: 3;
+  width: 28px; height: 28px; border-radius: 50%;
+  background: var(--hf-acc); color: var(--hf-on-acc, #fff);
+  display: flex; align-items: center; justify-content: center;
+  padding-left: 2px;
+  box-shadow: 0 4px 12px -4px rgba(0,0,0,.4);
+}
 
-/* ── Workplace collage (4-item varied layout) ────────────────── */
+/* ═══════════════════════════════════════════════════════════════
+   WorkplaceCollage (wc) — large-left | mid-stacked | large-right
+   ═══════════════════════════════════════════════════════════════ */
 .wc-collage {
   display: grid;
-  grid-template-columns: 1.5fr 1fr 1fr;
+  grid-template-columns: 1.5fr 1fr 1.5fr;
   grid-template-rows: 220px 220px;
   gap: 10px;
   border-radius: 18px;
   overflow: hidden;
 }
-/* Photo (item 0): tall left tile */
 .wc-tile--0 { grid-column: 1; grid-row: 1 / 3 }
-/* Video 1: top-middle */
 .wc-tile--1 { grid-column: 2; grid-row: 1 }
-/* Video 2: top-right */
-.wc-tile--2 { grid-column: 3; grid-row: 1 }
-/* Video 3: wide bottom spanning cols 2-3 */
-.wc-tile--3 { grid-column: 2 / 4; grid-row: 2 }
-
-.wc-tile {
-  border-radius: 12px;
-  overflow: hidden;
-  position: relative;
-  background: var(--hf-surface);
-}
-.wc-media {
-  width: 100%; height: 100%;
-  object-fit: cover; display: block;
-}
-
+.wc-tile--2 { grid-column: 2; grid-row: 2 }
+.wc-tile--3 { grid-column: 3; grid-row: 1 / 3 }
+.wc-tile { border-radius: 12px; overflow: hidden; position: relative; background: var(--hf-surface) }
+.wc-media { width: 100%; height: 100%; object-fit: cover; display: block }
 @media (max-width: 768px) {
   .wc-collage {
     grid-template-columns: 1fr 1fr;
-    grid-template-rows: 180px 180px 180px;
+    grid-template-rows: 180px 180px 180px 180px;
   }
   .wc-tile--0 { grid-column: 1 / 3; grid-row: 1 }
   .wc-tile--1 { grid-column: 1; grid-row: 2 }
   .wc-tile--2 { grid-column: 2; grid-row: 2 }
   .wc-tile--3 { grid-column: 1 / 3; grid-row: 3 }
 }
-
-/* ── Cohort One — sub-headings per movement ──────────────────── */
-.c1-movement__sub {
-  font-size: 15px; line-height: 1.6; color: var(--hf-ink-2);
-  margin: -12px 0 24px;
-}
-.c1-beyond-copy {
-  font-size: 18px; line-height: 1.65; color: var(--hf-ink);
-  margin: 0 0 32px;
-}
-.c1-beyond-copy strong { font-weight: 700 }
