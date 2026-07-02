@@ -115,7 +115,7 @@ export default function HomePage() {
             <div className="intern-video-sm">
               <HeroAutoVideo
                 poster="/assets/intern-hero.jpg"
-                src="/assets/our-story-video.MP4"
+                src="/assets/internship%20video.mp4"
                 alt="Our Story — Osarhieme on the UC internship"
               />
             </div>

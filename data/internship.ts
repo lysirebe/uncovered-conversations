@@ -55,7 +55,7 @@ export interface SpotlightIntern {
 
 export const SPOTLIGHT: SpotlightIntern[] = [
   { name: 'Tobi Olayiwola — Programs Intern at Kobikam Africa', short: 'Tobi', photo: '/assets/tobi.png', video: true, videoSrc: '/assets/video-tobi-testimonial.MP4' },
-  { name: 'Amen Olorunnisola — Marketing Intern', short: 'Amen', photo: '/assets/Amen.png' },
+  { name: 'Amen Olorunnisola — Marketing Intern', short: 'Amen', photo: '/assets/Amen.png', video: true, videoSrc: '/assets/video-amen-testimonial.MP4' },
   { name: 'Dunke Majekodunmi — Marketing Intern at Haske Cafe', short: 'Dunke', photo: '/assets/dunke.png' },
   { name: 'Ronke — UC Intern', short: 'Ronke', photo: '/assets/ronke.png', video: true, videoSrc: '/assets/video-dunke-testimonial.MP4' },
   { name: 'Anne — UC Intern', short: 'Anne', photo: '/assets/anne.png', video: true, videoSrc: '/assets/video-anne-testimonial.MP4' },

@@ -1,7 +1,7 @@
 export interface GalleryItem {
   src: string
   type: 'image' | 'video'
-  slot: 0 | 1 | 2 | 3  // 0=large-left, 1=mid-top, 2=mid-bottom, 3=large-right
+  slot: 0 | 1 | 2 | 3 | 4  // 0=large-left, 1=mid-top, 2=mid-bottom, 3=large-right, 4=far-right
 }
 
 export interface Speaker {
@@ -19,7 +19,7 @@ export const INTERN_GALLERY: GalleryItem[] = [
   { src: '/assets/ig-haske-video.MP4',         type: 'video', slot: 1 },
   { src: '/assets/ig-haske-cafe-video.MP4',    type: 'video', slot: 2 },
   { src: '/assets/ig-skineeds-photo.JPG',      type: 'image', slot: 3 },
-  // ← add more { src, type, slot } entries here for future cohort media
+  { src: '/assets/internship%20gallery/ronke%20arami.MP4', type: 'video', slot: 4 },
 ]
 
 export const SPEAKERS: Speaker[] = [
