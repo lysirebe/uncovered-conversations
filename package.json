@@ -9,16 +9,24 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@portabletext/react": "^3.2.4",
+    "@sanity/client": "^6.29.1",
+    "@sanity/image-url": "^1.2.0",
     "next": "^15.3.0",
+    "next-sanity": "^9.12.3",
     "react": "^19.0.0",
-    "react-dom": "^19.0.0"
+    "react-dom": "^19.0.0",
+    "sanity": "^3.99.0"
   },
   "devDependencies": {
     "@types/node": "^22",
     "@types/react": "^19",
     "@types/react-dom": "^19",
+    "cheerio": "^1.2.0",
     "eslint": "^9",
     "eslint-config-next": "^15.3.0",
+    "playwright": "^1.61.1",
+    "remark": "^15.0.1",
     "typescript": "^5"
   }
 }

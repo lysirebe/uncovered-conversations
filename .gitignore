@@ -22,3 +22,6 @@ npm-debug.log*
 *.tsbuildinfo
 next-env.d.ts
 .vercel
+
+# Raw Google Docs blog exports (imported into Sanity, not needed at runtime)
+content/blog-imports/
