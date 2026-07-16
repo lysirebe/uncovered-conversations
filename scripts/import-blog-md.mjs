@@ -36,9 +36,11 @@ const client = createClient({
   useCdn: false,
 })
 
-const filePath = process.argv[2]
+const args = process.argv.slice(2).filter((a) => !a.startsWith('--doc='))
+const docOverride = process.argv.slice(2).find((a) => a.startsWith('--doc='))?.slice('--doc='.length)
+const filePath = args[0]
 if (!filePath) {
-  console.error('Usage: node scripts/import-blog-md.mjs <path-to-md-file>')
+  console.error('Usage: node scripts/import-blog-md.mjs <path-to-md-file> [--doc=<sanity-doc-id>]')
   process.exit(1)
 }
 
@@ -46,7 +48,9 @@ const rk = () => Math.random().toString(36).slice(2)
 
 // ── Episode / season parsing ────────────────────────────────────────────────
 function parseEpisodeSeason(str) {
-  const s2 = str.match(/S(?:eason)?\s*2.*?EP\.?\s*0*(\d+)/i) ?? str.match(/S2:?\s*EP\.?\s*0*(\d+)/i)
+  // Matches "S2", "S.2", "S 2", "Season 2" etc. as long as it precedes an EP marker,
+  // without also matching "S1" or incidental digits elsewhere in the filename/title.
+  const s2 = str.match(/\bS(?:eason)?\.?\s*2(?!\d).*?EP\.?\s*0*(\d+)/i)
   if (s2) return { episode: `EP.${s2[1].padStart(3, '0')}`, season: 2 }
   const ep = str.match(/EP\.?\s*0*(\d+)/i)
   if (ep) return { episode: `EP.${ep[1].padStart(3, '0')}`, season: 1 }
@@ -135,11 +139,36 @@ async function main() {
 
   const definitions = new Map(top.filter((n) => n.type === 'definition').map((d) => [d.identifier, d.url]))
 
-  if (top[0]?.type !== 'heading') {
-    console.error('Expected the first line to be a "# Title" heading — aborting.')
+  const textOf = (node) => {
+    if (node.type === 'text') return node.value ?? ''
+    if (node.children) return node.children.map(textOf).join('')
+    return ''
+  }
+  const isEmptyNode = (node) => textOf(node).trim() === ''
+
+  // Google Docs exports vary: sometimes a real "# Title" heading, sometimes the title is
+  // just the first item of the byline list (no Heading-1 style applied), and sometimes
+  // there's a stray empty leading bullet before either. Handle all three.
+  let headerIdx = 0
+  while (top[headerIdx] && isEmptyNode(top[headerIdx])) headerIdx++
+
+  let titleText
+  let bodyStartIdx
+  if (top[headerIdx]?.type === 'heading') {
+    titleText = textOf(top[headerIdx])
+    bodyStartIdx = headerIdx + 1
+    if (top[bodyStartIdx]?.type === 'list') bodyStartIdx++
+  } else if (top[headerIdx]?.type === 'list') {
+    titleText = textOf(top[headerIdx].children[0])
+    bodyStartIdx = headerIdx + 1
+  } else if (top[headerIdx]?.type === 'paragraph') {
+    titleText = textOf(top[headerIdx])
+    bodyStartIdx = headerIdx + 1
+    if (top[bodyStartIdx]?.type === 'list') bodyStartIdx++
+  } else {
+    console.error('Could not find a title (no heading, list, or paragraph at the top of the doc) — aborting.')
     process.exit(1)
   }
-  const titleText = top[0].children.map((c) => c.value ?? '').join('')
   console.log(`Title: ${titleText}`)
 
   const { episode, season } = parseEpisodeSeason(`${filePath} ${titleText}`)
@@ -149,29 +178,38 @@ async function main() {
   }
   console.log(`Parsed: ${episode} / Season ${season}`)
 
-  const matches = await client.fetch(
-    `*[_type == "conversation" && episode == $episode && season == $season]{_id, title, coverImage, excerpt}`,
-    { episode, season }
-  )
-  if (matches.length === 0) {
-    console.error(`No existing conversation doc found for ${episode} season ${season}. Create-new flow isn't wired up yet — stopping.`)
-    process.exit(1)
+  let target
+  if (docOverride) {
+    target = await client.fetch(`*[_id == $id][0]{_id, title, coverImage, excerpt}`, { id: docOverride })
+    if (!target) {
+      console.error(`--doc=${docOverride} did not match any document.`)
+      process.exit(1)
+    }
+  } else {
+    const matches = await client.fetch(
+      `*[_type == "conversation" && episode == $episode && season == $season]{_id, title, coverImage, excerpt}`,
+      { episode, season }
+    )
+    if (matches.length === 0) {
+      console.error(`No existing conversation doc found for ${episode} season ${season}. Create-new flow isn't wired up yet — stopping.`)
+      process.exit(1)
+    }
+    if (matches.length > 1) {
+      console.error(`Multiple docs matched ${episode} season ${season}: ${matches.map((m) => m._id).join(', ')} — re-run with --doc=<id> to disambiguate.`)
+      process.exit(1)
+    }
+    target = matches[0]
   }
-  if (matches.length > 1) {
-    console.error(`Multiple docs matched ${episode} season ${season}: ${matches.map((m) => m._id).join(', ')} — resolve manually.`)
-    process.exit(1)
-  }
-  const target = matches[0]
   console.log(`Matched Sanity doc: ${target._id} ("${target.title}")`)
 
-  // Body starts after the title (index 0) and the byline metadata list (index 1, if present).
-  let startIdx = 1
-  if (top[1]?.type === 'list') startIdx = 2
+  const startIdx = bodyStartIdx
 
-  // Cut off at the first heading after the title (marks the start of Wix page chrome).
+  // Cut off at the "Recent Posts" heading, which marks the start of Wix page chrome.
+  // (Not "any heading" — some posts have legitimate mid-content headings, e.g. a
+  // "This is a continuation of the previous conversation!" note on multi-part episodes.)
   let endIdx = top.length
   for (let i = startIdx; i < top.length; i++) {
-    if (top[i].type === 'heading') {
+    if (top[i].type === 'heading' && /^recent posts$/i.test(textOf(top[i]).trim())) {
       endIdx = i
       break
     }
@@ -179,7 +217,12 @@ async function main() {
 
   const bodyNodes = top.slice(startIdx, endIdx)
 
-  // Strip a leading "Updated: ..." + break from the first paragraph, if present.
+  // Drop a leading paragraph that's just "Updated: <date>" on its own (blank lines around it).
+  while (bodyNodes[0]?.type === 'paragraph' && /^Updated:\s*[^\s].*$/i.test(textOf(bodyNodes[0]).trim())) {
+    bodyNodes.shift()
+  }
+
+  // Strip a leading "Updated: ..." + break from the first paragraph, if it's joined to real content.
   if (bodyNodes[0]?.type === 'paragraph') {
     const kids = bodyNodes[0].children
     if (kids[0]?.type === 'text' && /^Updated:/.test(kids[0].value) && kids[1]?.type === 'break') {
