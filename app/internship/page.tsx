@@ -16,7 +16,7 @@ export default function InternshipPage() {
       <section className="hf-phero hf-int-hero">
         <span className="hf-blob b1" />
         <div className="hf-c">
-          <div className="chip-acc">UC Internship · cohort 02 open</div>
+          <div className="chip-acc">UC Internship · cohort 02 — applications open Aug 2026</div>
           <div className="int-hero-grid">
             <div className="int-left">
               <h1>we bridge<br />young talent &amp;<br /><em>founder-led</em> orgs.</h1>
@@ -110,10 +110,10 @@ export default function InternshipPage() {
           <div className="grid">
             <div className="card">
               <div className="chip">For interns</div>
-              <h4>Cohort 02 — July &apos;26</h4>
-              <p>Applications are open now. All you&apos;ll need is a CV.</p>
+              <h4>Cohort 02 — August &apos;26</h4>
+              <p>Applications open August 2026. All you&apos;ll need is a CV.</p>
               <a className="hf-btn acc" href={APPLY_URL} target="_blank" rel="noopener noreferrer">
-                July &apos;26 — apply now <span className="arr">→</span>
+                Applications open Aug &apos;26 <span className="arr">→</span>
               </a>
             </div>
             <div className="card acc">

@@ -1,137 +1,144 @@
-'use client'
-
-import { useState } from 'react'
 import { Nav } from '@/components/Nav'
 import { Footer } from '@/components/Footer'
-import { HfImg } from '@/components/HfImg'
-import { S1, S2, CHIPS } from '@/data/conversations'
-import type { Episode, Area } from '@/data/conversations'
+import { safeQuery, ALL_CONVERSATIONS_QUERY, urlFor } from '@/lib/sanity'
+import type { Conversation } from '@/lib/sanity'
+import Link from 'next/link'
 
-function ConvCover({ e, season }: { e: Episode; season: string }) {
+// Titles are consistently "... w/ Guest Name" (case/spacing varies) — pull the guest,
+// not Osarhieme (the interviewer, stored in the `author` field).
+function guestFromTitle(title: string): string {
+  const parts = title.split(/\bw\/\s*/i)
+  return parts.length > 1 ? parts[parts.length - 1].replace(/\s+/g, ' ').trim() : title
+}
+
+function staticCoverFromEpisode(episode?: string, season?: number): string | null {
+  if (!episode) return null
+  const n = episode.replace(/EP\.?\s*/i, '').trim().replace(/^0+/, '').padStart(3, '0')
+  if (season === 2) return `/assets/conv/s2ep${n}.avif`
+  return `/assets/conv/ep${n}.avif`
+}
+
+function ConvCover({ conv }: { conv: Conversation }) {
+  const imgSrc = conv.coverImage
+    ? urlFor(conv.coverImage).width(400).height(500).url()
+    : staticCoverFromEpisode(conv.episode, conv.season)
+  const seasonLabel = conv.season ? `S${conv.season}` : ''
+  const epLabel = conv.episode ?? ''
+  const caption = [seasonLabel, epLabel].filter(Boolean).join(' · ')
+
   return (
-    <a className="cv" href="#" onClick={(ev) => ev.preventDefault()} title={`${e.name} — ${e.topic}`}>
+    <Link className="cv" href={`/conversations/${conv.slug.current}`} title={conv.title}>
       <div className="cover">
-        {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img src={e.src} alt={`${e.name} — ${e.topic}`} loading="lazy" />
+        {imgSrc ? (
+          <img src={imgSrc} alt={conv.title} loading="lazy" />
+        ) : (
+          <div style={{ position: 'absolute', inset: 0, background: 'var(--hf-surface-2)' }} />
+        )}
         <span className="read"><span>Read →</span></span>
       </div>
       <div className="cap">
-        <span className="ep">{season} · {e.n}</span>
-        <span className="area">{e.area}</span>
+        <span className="ep">{caption}</span>
+        <span className="area">{guestFromTitle(conv.title)}</span>
       </div>
-    </a>
+    </Link>
   )
 }
 
-export default function ConversationsPage() {
-  const [active, setActive] = useState<typeof CHIPS[number]>('All')
-  const total = S1.length + S2.length
+export const revalidate = 60
 
-  const filterEps = (eps: Episode[]) =>
-    active === 'All' ? eps : eps.filter((e) => e.area === (active as Area))
+export default async function ConversationsPage() {
+  const conversations = await safeQuery<Conversation[]>(ALL_CONVERSATIONS_QUERY)
+  const list = conversations ?? []
 
-  const filteredS2 = filterEps(S2)
-  const filteredS1 = filterEps(S1)
+  const featured = list.find((c) => c.episode === 'EP.004' && c.season === 2) ?? list[0] ?? null
+  const season2  = list.filter((c) => c.season === 2)
+  const season1  = list.filter((c) => c.season === 1)
+  const total    = list.length
+
+  const featImgSrc = featured
+    ? (featured.coverImage
+        ? urlFor(featured.coverImage).width(900).height(700).url()
+        : staticCoverFromEpisode(featured.episode, featured.season))
+    : null
 
   return (
     <>
       <Nav />
 
       {/* Hero */}
-      <section className="hf-phero">
+      <section className="hf-phero hf-phero--center">
         <span className="hf-blob b1" />
         <div className="hf-c">
           <div className="chip-acc">Conversations · the archive</div>
-          <h1>it started<br />with a<br /><em>conversation.</em></h1>
+          <h1>it started with a <em>conversation.</em></h1>
           <div className="lead">
             Long-form, written reflections from the people we wished we&apos;d had access to at 22 —
-            {' '}{total} posts across two seasons, spanning finance, fashion, faith, beauty,
+            {' '}{total || 37} posts across two seasons, spanning finance, fashion, faith, beauty,
             career, wellness and more.
           </div>
         </div>
       </section>
 
-      {/* Filter chips */}
-      <section className="hf-conv-filter">
-        <div className="hf-c">
-          <div className="row">
-            {CHIPS.map((c) => (
-              <button
-                key={c}
-                className={`chip${active === c ? (c === 'All' ? ' acc' : ' on') : ''}`}
-                onClick={() => setActive(c)}
-              >
-                {c}
-              </button>
-            ))}
-            <span className="meta">{total} posts · 2 seasons</span>
-          </div>
-        </div>
-      </section>
-
       {/* Featured episode */}
-      <section className="hf-conv-feat">
-        <div className="row">
-          <div className="img-side">
-            <span className="badge">Featured · S2 EP005</span>
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img
-              src="/assets/conv/s2ep005.avif"
-              alt="Imade Ogbemudia — Evolving with the Vision"
-              style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'center top', display: 'block' }}
-            />
-          </div>
-          <div className="body-side">
-            <div className="meta">
-              <span className="chip">Vision</span>
-              <span className="chip">S2 · EP005</span>
-              <span className="chip">2022</span>
+      {featured && (
+        <section className="hf-conv-feat">
+          <div className="row">
+            <div className="img-side">
+              <span className="badge">
+                Featured · {featured.season ? `S${featured.season} ` : ''}{featured.episode ?? ''}
+              </span>
+              {featImgSrc && (
+                <img
+                  src={featImgSrc}
+                  alt={featured.title}
+                  style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'center top', display: 'block' }}
+                />
+              )}
             </div>
-            <h2><em>Imade Ogbemudia.</em><br />evolving with<br />the vision.</h2>
-            <p className="lead">
-              A long-form conversation on what it takes to keep a vision alive when the season,
-              the team and the version of you all keep shifting. On staying ready, asking for help,
-              and the quiet discipline of doing the work no one&apos;s watching.
-            </p>
-            <div className="ctas">
-              <button className="hf-btn acc">Read the post <span className="arr">→</span></button>
-              <button className="hf-btn outline">Browse the archive</button>
+            <div className="body-side">
+              <div className="meta">
+                {featured.episode && <span className="chip">{featured.episode}</span>}
+                {featured.season  && <span className="chip">S{featured.season}</span>}
+              </div>
+              <h2><em>{guestFromTitle(featured.title)}.</em><br />{featured.title}</h2>
+              {featured.excerpt && <p className="lead">{featured.excerpt}</p>}
+              <div className="ctas">
+                <Link href={`/conversations/${featured.slug.current}`} className="hf-btn acc">
+                  Read the post <span className="arr">→</span>
+                </Link>
+                <a href="#archive" className="hf-btn outline">Browse the archive</a>
+              </div>
             </div>
           </div>
-        </div>
-      </section>
+        </section>
+      )}
 
       {/* Archive grid */}
-      <section className="hf-conv-grid">
+      <section className="hf-conv-grid" id="archive">
         <div className="hf-c">
-          {filteredS2.length > 0 && (
+          {season2.length > 0 && (
             <>
               <div className="seasonhd">
                 <h3>season <em>two.</em></h3>
-                <div className="meta">2022 · 5 episodes</div>
+                <div className="meta">2022 · {season2.length} episodes</div>
               </div>
-              {/* S2: all 5 on one row */}
               <div className="grid grid--s2">
-                {filteredS2.map((e) => <ConvCover key={e.id} e={e} season="S2" />)}
+                {season2.map((c) => <ConvCover key={c._id} conv={c} />)}
               </div>
             </>
           )}
 
-          {filteredS1.length > 0 && (
+          {season1.length > 0 && (
             <>
               <div className="seasonhd">
                 <h3>season <em>one.</em></h3>
-                <div className="meta">2021 · 31 episodes</div>
+                <div className="meta">2021 · {season1.length} episodes</div>
               </div>
               <div className="grid">
-                {filteredS1.map((e) => <ConvCover key={e.id} e={e} season="S1" />)}
+                {season1.map((c) => <ConvCover key={c._id} conv={c} />)}
               </div>
             </>
           )}
-
-          <div className="hf-conv-tail">
-            plus our Nov &apos;22 community update — uncovered conversations, moving forward
-          </div>
         </div>
       </section>
 

@@ -132,8 +132,18 @@ async function uploadDataUriImage(dataUri, filename) {
 }
 
 // ── Main ─────────────────────────────────────────────────────────────────────
+// CommonMark won't close a `**`/`*` run when the closer is preceded by punctuation
+// (e.g. a colon or period) and immediately followed by a letter with no space —
+// e.g. "**Rhieme:**Thank you" — so it renders as literal asterisks instead of bold.
+// Insert the missing space so it parses as intended. Only fires on closers that
+// would otherwise fail to parse; leaves already-valid emphasis untouched.
+function fixUnclosableEmphasis(text) {
+  return text.replace(/(\*\*|\*)([^\n*]+?[.,:;!?'")’”\-–—])\1(?=[A-Za-z])/g, '$1$2$1 ')
+}
+
 async function main() {
-  const raw = await readFile(filePath, 'utf8')
+  const raw0 = await readFile(filePath, 'utf8')
+  const raw = fixUnclosableEmphasis(raw0)
   const tree = remark().parse(raw)
   const top = tree.children
 
