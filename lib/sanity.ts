@@ -46,6 +46,22 @@ export const CONVERSATION_BY_SLUG_QUERY = `
 
 export const ALL_SLUGS_QUERY = `*[_type == "conversation"].slug.current`
 
+export interface ConversationNavItem {
+  _id: string
+  title: string
+  slug: { current: string }
+  episode?: string
+  season?: number
+  coverImage?: SanityImageSource
+}
+
+// Ordered oldest → newest, used to work out the previous/next post from the current index.
+export const NAV_CONVERSATIONS_QUERY = `
+  *[_type == "conversation"] | order(publishedDate asc) {
+    _id, title, slug, episode, season, coverImage
+  }
+`
+
 // ── Safe fetcher (returns [] / null when Sanity isn't wired yet) ────────────
 export async function safeQuery<T>(query: string, params?: Record<string, unknown>): Promise<T> {
   if (!process.env.NEXT_PUBLIC_SANITY_PROJECT_ID) {
