@@ -23,6 +23,9 @@ const ptComponents: PortableTextComponents = {
       />
     ),
   },
+  block: {
+    intro: ({ children }) => <p className="cp-intro">{children}</p>,
+  },
 }
 
 function staticCoverFromEpisode(episode?: string, season?: number): string | null {

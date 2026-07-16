@@ -2371,3 +2371,85 @@ html, body { margin: 0; padding: 0 }
   .wc-tile--3 { grid-column: 1; grid-row: 3 }
   .wc-tile--4 { grid-column: 2; grid-row: 3 }
 }
+
+/* ═══════════════════════════════════════════════════════════════
+   Conversation post page (cp)
+   ═══════════════════════════════════════════════════════════════ */
+.cp-article {
+  padding-bottom: 80px;
+}
+.cp-cover {
+  width: 100%;
+  max-height: 480px;
+  overflow: hidden;
+}
+.cp-cover img {
+  width: 100%;
+  height: 480px;
+  object-fit: cover;
+  object-position: center top;
+  display: block;
+}
+.cp-body {
+  padding-top: 48px;
+  max-width: 760px;
+  margin: 0 auto;
+}
+.cp-meta {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 20px;
+  flex-wrap: wrap;
+}
+.cp-season,
+.cp-date {
+  font: 500 13px/1 var(--hf-grot);
+  color: var(--hf-ink-2);
+  letter-spacing: .04em;
+}
+.cp-title {
+  font: 700 clamp(38px, 6.5vw, 72px)/1.08 var(--hf-serif);
+  color: var(--hf-ink);
+  margin: 0 0 16px;
+}
+.cp-author {
+  font: 500 16px/1.4 var(--hf-grot);
+  color: var(--hf-ink-2);
+  margin: 0 0 24px;
+  letter-spacing: .04em;
+  text-transform: uppercase;
+}
+.cp-excerpt {
+  font: 400 19px/1.7 var(--hf-grot);
+  font-style: italic;
+  color: var(--hf-ink-2);
+  margin: 0 0 40px;
+  border-left: 3px solid var(--hf-accent);
+  padding-left: 20px;
+}
+.cp-content {
+  font: 400 17px/1.8 var(--hf-grot);
+  color: var(--hf-ink);
+}
+.cp-content .cp-intro { font-style: italic; color: var(--hf-ink-2) }
+.cp-content p  { margin: 0 0 1.4em }
+.cp-content h2 { font: 700 26px/1.2 var(--hf-serif); margin: 2em 0 .6em; color: var(--hf-ink) }
+.cp-content h3 { font: 700 20px/1.3 var(--hf-serif); margin: 1.6em 0 .5em; color: var(--hf-ink) }
+.cp-content blockquote {
+  border-left: 3px solid var(--hf-accent);
+  padding: 4px 0 4px 20px;
+  margin: 1.6em 0;
+  font-style: italic;
+  color: var(--hf-ink-2);
+}
+.cp-content img {
+  width: 100%;
+  border-radius: 12px;
+  margin: 2em 0;
+  display: block;
+}
+@media (max-width: 768px) {
+  .cp-cover img { height: 280px }
+  .cp-body { padding-top: 32px }
+}

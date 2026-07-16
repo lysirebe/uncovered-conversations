@@ -150,7 +150,7 @@ async function main() {
   console.log(`Parsed: ${episode} / Season ${season}`)
 
   const matches = await client.fetch(
-    `*[_type == "conversation" && episode == $episode && season == $season]{_id, title, coverImage}`,
+    `*[_type == "conversation" && episode == $episode && season == $season]{_id, title, coverImage, excerpt}`,
     { episode, season }
   )
   if (matches.length === 0) {
@@ -231,6 +231,30 @@ async function main() {
         }
       }
     }
+  }
+
+  // Wix pages repeat the excerpt as the opening line of the body — drop the duplicate.
+  if (target.excerpt && body[0]?._type === 'block') {
+    const firstText = body[0].children.map((c) => c.text).join('').trim()
+    const excerptNorm = target.excerpt.trim()
+    if (firstText && (firstText === excerptNorm || excerptNorm.startsWith(firstText.slice(0, 60)))) {
+      body.shift()
+      console.log('  dropped opening paragraph — duplicates the excerpt')
+    }
+  }
+
+  // Style everything before the interview dialogue starts (guest bio, framing) as the italic intro.
+  const isDialogueStart = (block) => {
+    if (block._type !== 'block') return false
+    const first = block.children[0]
+    return Boolean(first?.marks?.includes('strong') && /:\s*$/.test((first.text ?? '').trim()))
+  }
+  const dialogueIdx = body.findIndex(isDialogueStart)
+  if (dialogueIdx > 0) {
+    for (let i = 0; i < dialogueIdx; i++) {
+      if (body[i]._type === 'block' && body[i].style === 'normal') body[i].style = 'intro'
+    }
+    console.log(`  styled ${dialogueIdx} intro block(s) as italic`)
   }
 
   console.log(`\nBuilt ${body.length} body blocks, ${imageCount} images (${coverImageBlock ? '1 set as cover' : 'none as cover'}).`)
