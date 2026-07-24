@@ -18,7 +18,7 @@ function staticCoverFromEpisode(episode?: string, season?: number): string | nul
   return `/assets/conv/ep${n}.avif`
 }
 
-function ConvCover({ conv }: { conv: Conversation }) {
+function ConvCover({ conv, showTitle }: { conv: Conversation; showTitle?: boolean }) {
   const imgSrc = conv.coverImage
     ? urlFor(conv.coverImage).width(400).height(500).url()
     : staticCoverFromEpisode(conv.episode, conv.season)
@@ -40,6 +40,7 @@ function ConvCover({ conv }: { conv: Conversation }) {
         <span className="ep">{caption}</span>
         <span className="area">{guestFromTitle(conv.title)}</span>
       </div>
+      {showTitle && <span className="ttl">{conv.title}</span>}
     </Link>
   )
 }
@@ -123,7 +124,7 @@ export default async function ConversationsPage() {
                 <div className="meta">2022 · {season2.length} episodes</div>
               </div>
               <div className="grid grid--s2">
-                {season2.map((c) => <ConvCover key={c._id} conv={c} />)}
+                {season2.map((c) => <ConvCover key={c._id} conv={c} showTitle />)}
               </div>
             </>
           )}
