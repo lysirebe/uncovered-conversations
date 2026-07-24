@@ -32,6 +32,7 @@ function GalleryTile({ item }: { item: GalleryItem }) {
       <video
         ref={videoRef}
         src={item.src}
+        poster={item.poster}
         className="wc-media"
         playsInline
         muted={!playing}

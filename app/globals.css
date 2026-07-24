@@ -2346,7 +2346,9 @@ html, body { margin: 0; padding: 0 }
   transition: opacity .35s ease;
   background: var(--hf-card);
 }
-.fcard:hover .irc-img { opacity: 0.18 }
+@media (hover: hover) and (pointer: fine) {
+  .fcard:hover .irc-img { opacity: 0.18 }
+}
 .irc-vid {
   position: absolute; inset: 0;
   width: 100%; height: 100%;
@@ -2418,6 +2420,9 @@ html, body { margin: 0; padding: 0 }
   cursor: pointer;
 }
 .wc-tile:hover .wc-play { opacity: 1; transform: scale(1) }
+@media (hover: none) {
+  .wc-play { opacity: 1; transform: scale(1) }
+}
 .wc-tile:has(video[controls]) .wc-media { transform: none }
 .wc-nav {
   position: absolute;

@@ -135,8 +135,8 @@ export default async function ConversationsPage() {
                 <h3>season <em>one.</em></h3>
                 <div className="meta">2021 · {season1.length} episodes</div>
               </div>
-              <div className="grid">
-                {season1.map((c) => <ConvCover key={c._id} conv={c} />)}
+              <div className="grid grid--s2">
+                {season1.map((c) => <ConvCover key={c._id} conv={c} showTitle />)}
               </div>
             </>
           )}
