@@ -45,7 +45,7 @@ export default function InternshipPage() {
               <div className="int-hero-video-player">
                 <HeroAutoVideo
                   poster="/assets/intern-hero.jpg"
-                  src="/assets/internship%20video%20updated.MP4"
+                  src="/assets/new%20internship%20video.MP4"
                   alt="UC internship · our story"
                 />
               </div>

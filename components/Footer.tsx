@@ -46,7 +46,7 @@ export function Footer() {
           <div className="col">
             <div className="col-t">Social</div>
             <div className="footer-socials">
-              <a href="https://www.instagram.com/uncoveredconversations/" target="_blank" rel="noopener noreferrer" aria-label="Instagram" className="footer-social-link">
+              <a href="https://www.instagram.com/uncoveredconversations_?igsh=MW1obTE4cTNrY3cxZw==" target="_blank" rel="noopener noreferrer" aria-label="Instagram" className="footer-social-link">
                 <InstagramIcon />
               </a>
               <a href="https://www.linkedin.com/company/uncovered-conversations/posts/?feedView=all" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn" className="footer-social-link">
