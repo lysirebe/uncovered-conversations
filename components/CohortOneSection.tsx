@@ -2,7 +2,7 @@
 
 import { useState } from 'react'
 import { InternRevealCard } from './InternRevealCard'
-import { WorkplaceCollage } from './WorkplaceCollage'
+import { WorkplaceGallery } from './WorkplaceGallery'
 import { InternLightbox } from './InternLightbox'
 import { SpeakerModal } from './SpeakerModal'
 import { SPOTLIGHT } from '@/data/internship'
@@ -69,7 +69,7 @@ export function CohortOneSection() {
             <p className="c1-movement__sub">
               Here&apos;s a snippet of what the interns got up to.
             </p>
-            <WorkplaceCollage items={INTERN_GALLERY} />
+            <WorkplaceGallery items={INTERN_GALLERY} />
           </div>
 
           {/* ── Bridge copy — centered ──────────────────────── */}

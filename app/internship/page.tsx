@@ -80,7 +80,7 @@ export default function InternshipPage() {
         <div className="hf-c">
           <div className="hd">
             <h3>how it <em>works.</em></h3>
-            <div className="meta">4 steps · 6-week placement · paid</div>
+            <div className="meta">4 steps · 12-week placement · paid</div>
           </div>
           <div className="grid">
             {STEPS.map((s) => (

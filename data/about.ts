@@ -46,7 +46,7 @@ export const TEAM: TeamMember[] = [
   },
   {
     name: 'Lys', role: 'Head of Admin', photo: '/assets/team-lys.jpg',
-    bio: 'Lys keeps Uncovered Conversations running behind the scenes — coordinating operations, logistics and the day-to-day details that hold our programmes and events together so everything lands smoothly.',
+    bio: 'Lys is the Head of Admin at Uncovered Conversations, where she keeps operations, logistics and the day-to-day details running smoothly so that every programme and event comes together seamlessly. She studied a degree apprenticeship in Software Engineering, gaining hands-on industry experience alongside her studies. Beyond her work in tech, Lys has a love for all things design — from web development to product design and innovation — and outside of work she is passionate about health and wellness, and living with balance and intention.',
   },
   {
     name: 'Adeoti', role: 'Head of Programmes', photo: '/assets/team-adeoti.jpg',

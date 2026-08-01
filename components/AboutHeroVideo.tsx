@@ -10,7 +10,7 @@ export function AboutHeroVideo() {
       {playing ? (
         <>
           <video
-            src="/assets/our-story-video.MP4"
+            src="/assets/our-story-video-new.MP4"
             controls
             autoPlay
             playsInline

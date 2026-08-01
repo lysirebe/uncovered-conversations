@@ -26,7 +26,7 @@ export const STEPS: Step[] = [
   },
   {
     n: 3, t: 'The internship',
-    lead: 'A 6-week placement (extensible) inside a founder-led organisation.',
+    lead: 'A 12-week placement inside a founder-led organisation.',
     points: [
       'Contribute to real-life projects from day one',
       'Hands-on experience and genuine project ownership',
