@@ -41,8 +41,8 @@ export const TEAM: TeamMember[] = [
     bio: "Ibukun is the Head of Marketing at Uncovered Conversations, where she helps shape the organisation's communication and outreach through thoughtful strategy and engagement. She studied Business Management and Marketing at undergraduate level and later earned a master's degree in International Business. Alongside her work in the scientific industry, Ibukun is passionate about continuous learning and her faith — whether through developing new skills or broadening her understanding of real-life societal issues that impact society.",
   },
   {
-    name: 'Esther', role: 'Head of Community', photo: '/assets/team-esther.jpg',
-    bio: 'Esther leads community at Uncovered Conversations, nurturing the relationships and spaces where members connect, grow and feel they truly belong.',
+    name: 'Esther Oviawe', role: 'Community Management Team Lead', photo: '/assets/team-esther.jpg',
+    bio: 'Esther Oviawe is the Community Management Team Lead at Uncovered Conversations, where she focuses on building and nurturing communities that foster growth, connection, and meaningful experiences. A New Media and Communications graduate, she currently works across the fashion and venture capital industries. Esther is deeply interested in people, culture, and helping individuals find clarity, solutions, and become better versions of themselves.\n\nOutside of work, she enjoys reading, travelling, discovering new places and cultures, eating good food, and spending time with family and friends. She loves engaging conversations and is naturally drawn to spaces where ideas, people, and purpose come together.',
   },
   {
     name: 'Lys', role: 'Head of Admin', photo: '/assets/team-lys.jpg',

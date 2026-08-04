@@ -111,4 +111,4 @@ export const TESTIMONIALS: Testimonial[] = [
 
 export const CONTACT = 'mailto:admin@uncoveredconversations.com'
 export const PARTNER_FORM = 'https://forms.gle/F2PZB9Q9xDQ6amfB8'
-export const BOOK_A_CALL = 'https://calendar.app.google/jpXEE58xCB7UNMa1A'
+export const BOOK_A_CALL = 'https://calendar.app.google/F4LKEWdyeitFcDpZ9'

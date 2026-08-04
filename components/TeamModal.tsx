@@ -22,7 +22,9 @@ export function TeamModal({ person, onClose }: TeamModalProps) {
           <div className="hf-modal-body">
             <div className="role">{person.role}</div>
             <div className="name">{person.name}</div>
-            <p>{person.bio}</p>
+            {person.bio.split('\n\n').map((para, i) => (
+              <p key={i}>{para}</p>
+            ))}
           </div>
         </div>
       </div>

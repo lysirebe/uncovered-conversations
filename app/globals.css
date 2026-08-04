@@ -566,6 +566,7 @@ html, body { margin: 0; padding: 0 }
 .hf-modal-body .role { font: 600 11px/1 var(--hf-grot); letter-spacing: .1em; text-transform: uppercase; color: var(--hf-acc); margin-bottom: 14px }
 .hf-modal-body .name { font-family: var(--hf-display); font-size: 38px; line-height: 1.02; font-weight: 400; letter-spacing: -.02em; margin-bottom: 18px }
 .hf-modal-body p { font-size: 15px; line-height: 1.7; color: var(--hf-ink-2); margin: 0 }
+.hf-modal-body p + p { margin-top: 12px }
 
 /* ── Gallery overlay ─────────────────────────────────────────── */
 .hf-gallery-overlay {
