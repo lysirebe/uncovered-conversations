@@ -2,10 +2,22 @@ import { Nav } from '@/components/Nav'
 import { Footer } from '@/components/Footer'
 import { HfImg } from '@/components/HfImg'
 import { FameSection } from '@/components/FameSection'
-import { WHY, OPTIONS, TESTIMONIALS, CONTACT } from '@/data/partnerships'
-import { BOOK_A_CALL } from '@/data/links'
+import { safeQuery, PARTNERSHIPS_PAGE_QUERY, SITE_SETTINGS_QUERY } from '@/lib/sanity'
+import type { PartnershipsPage as PartnershipsPageData, SiteSettings } from '@/lib/sanity'
 
-export default function PartnershipsPage() {
+export const revalidate = 60
+
+export default async function PartnershipsPage() {
+  const partnerships = (await safeQuery<PartnershipsPageData>(PARTNERSHIPS_PAGE_QUERY)) ?? {}
+  const settings = (await safeQuery<SiteSettings>(SITE_SETTINGS_QUERY)) ?? {}
+
+  const WHY = partnerships.why ?? []
+  const OPTIONS = partnerships.options ?? []
+  const TESTIMONIALS = partnerships.testimonials ?? []
+  const FOUNDERS = partnerships.founders ?? []
+  const CONTACT = settings.contactEmail ? `mailto:${settings.contactEmail}` : ''
+  const BOOK_A_CALL = settings.bookACallUrl ?? ''
+
   return (
     <>
       <Nav />
@@ -67,7 +79,7 @@ export default function PartnershipsPage() {
                 <div className="num">{o.num}</div>
                 <h4>{o.t}</h4>
                 <div className="sub">{o.sub}</div>
-                <ul>{o.points.map((pt, j) => <li key={j}>{pt}</li>)}</ul>
+                <ul>{(o.points ?? []).map((pt, j) => <li key={j}>{pt}</li>)}</ul>
                 <div className="commit">{o.commit}</div>
                 <a className="opt-cta" href={o.mailto}>{o.cta} <span>→</span></a>
               </div>
@@ -87,7 +99,7 @@ export default function PartnershipsPage() {
       </section>
 
       {/* Founder hall of fame — hf-c inside component, marquee full-bleed */}
-      <FameSection />
+      <FameSection founders={FOUNDERS} />
 
       {/* Testimonials */}
       <section className="hf-pn-says">
@@ -129,17 +141,17 @@ export default function PartnershipsPage() {
             <div className="tier">
               <div className="t">Host an intern</div>
               <p>Bring vetted young talent into your organisation, fully supported by UC.</p>
-              <a href={OPTIONS[0].mailto}>Get started →</a>
+              <a href={OPTIONS[0]?.mailto}>Get started →</a>
             </div>
             <div className="tier">
               <div className="t">Collaborate with us</div>
               <p>Run a workshop or co-create with the UC community.</p>
-              <a href={OPTIONS[1].mailto}>Start a conversation →</a>
+              <a href={OPTIONS[1]?.mailto}>Start a conversation →</a>
             </div>
             <div className="tier">
               <div className="t">Become a sponsor</div>
               <p>Back the programmes — product, event or financial support.</p>
-              <a href={OPTIONS[2].mailto}>See sponsorship →</a>
+              <a href={OPTIONS[2]?.mailto}>See sponsorship →</a>
             </div>
           </div>
           <div className="primary">

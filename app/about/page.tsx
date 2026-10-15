@@ -4,10 +4,21 @@ import { Footer } from '@/components/Footer'
 import { HfImg } from '@/components/HfImg'
 import { AboutHeroVideo } from '@/components/AboutHeroVideo'
 import { TeamSection } from '@/components/TeamSection'
-import { MILESTONES, VALUES } from '@/data/about'
-import { VOLUNTEER_URL } from '@/data/links'
+import { safeQuery, ABOUT_PAGE_QUERY, SITE_SETTINGS_QUERY } from '@/lib/sanity'
+import type { AboutPage as AboutPageData, SiteSettings } from '@/lib/sanity'
 
-export default function AboutPage() {
+export const revalidate = 60
+
+export default async function AboutPage() {
+  const about = (await safeQuery<AboutPageData>(ABOUT_PAGE_QUERY)) ?? {}
+  const settings = (await safeQuery<SiteSettings>(SITE_SETTINGS_QUERY)) ?? {}
+
+  const MILESTONES = about.milestones ?? []
+  const VALUES = about.values ?? []
+  const founder = about.founder ?? { name: '', role: '', photo: '', quote: '', bio: '' }
+  const team = about.team ?? []
+  const VOLUNTEER_URL = settings.volunteerUrl ?? ''
+
   return (
     <>
       <Nav />
@@ -102,7 +113,7 @@ export default function AboutPage() {
       </section>
 
       {/* Team */}
-      <TeamSection />
+      <TeamSection team={team} founder={founder} />
 
       {/* Join us CTA */}
       <section className="hf-cta-c tight">

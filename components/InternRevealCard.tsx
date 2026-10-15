@@ -1,7 +1,7 @@
 'use client'
 
 import { useRef } from 'react'
-import type { SpotlightIntern } from '@/data/internship'
+import type { SpotlightIntern } from '@/lib/sanity'
 
 interface Props {
   spotlight: SpotlightIntern

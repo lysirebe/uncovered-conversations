@@ -1,6 +1,6 @@
 'use client'
 
-import type { SpotlightIntern } from '@/data/internship'
+import type { SpotlightIntern } from '@/lib/sanity'
 
 interface InternLightboxProps {
   intern: SpotlightIntern | null

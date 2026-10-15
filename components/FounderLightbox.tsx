@@ -1,6 +1,6 @@
 'use client'
 
-import type { Founder } from '@/data/partnerships'
+import type { FounderHeadshot as Founder } from '@/lib/sanity'
 
 interface FounderLightboxProps {
   founder: Founder | null

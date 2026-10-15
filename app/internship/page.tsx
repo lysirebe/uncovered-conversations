@@ -2,12 +2,22 @@ import { Nav } from '@/components/Nav'
 import { Footer } from '@/components/Footer'
 import { HeroAutoVideo } from '@/components/HeroAutoVideo'
 import { CohortOneSection } from '@/components/CohortOneSection'
-import { STEPS, PARTNERS } from '@/data/internship'
-import { APPLY_URL, PARTNER_FORM } from '@/data/links'
+import { safeQuery, INTERNSHIP_PAGE_QUERY, COHORT_PAGE_QUERY, SITE_SETTINGS_QUERY } from '@/lib/sanity'
+import type { InternshipPage as InternshipPageData, CohortPage, SiteSettings } from '@/lib/sanity'
 
-const tripled = [...PARTNERS, ...PARTNERS, ...PARTNERS]
+export const revalidate = 60
 
-export default function InternshipPage() {
+export default async function InternshipPage() {
+  const internship = (await safeQuery<InternshipPageData>(INTERNSHIP_PAGE_QUERY)) ?? {}
+  const cohort = (await safeQuery<CohortPage>(COHORT_PAGE_QUERY)) ?? {}
+  const settings = (await safeQuery<SiteSettings>(SITE_SETTINGS_QUERY)) ?? {}
+
+  const STEPS = internship.steps ?? []
+  const PARTNERS = internship.partners ?? []
+  const APPLY_URL = settings.applyUrl ?? ''
+  const PARTNER_FORM = settings.partnerFormUrl ?? ''
+  const tripled = [...PARTNERS, ...PARTNERS, ...PARTNERS]
+
   return (
     <>
       <Nav />
@@ -92,7 +102,7 @@ export default function InternshipPage() {
                 <h4>{s.t}</h4>
                 <div className="lead">{s.lead}</div>
                 <ul>
-                  {s.points.map((pt, j) => <li key={j}>{pt}</li>)}
+                  {(s.points ?? []).map((pt, j) => <li key={j}>{pt}</li>)}
                 </ul>
               </div>
             ))}
@@ -101,7 +111,11 @@ export default function InternshipPage() {
       </section>
 
       {/* Inside Cohort One */}
-      <CohortOneSection />
+      <CohortOneSection
+        spotlight={internship.spotlight ?? []}
+        internGallery={cohort.internGallery ?? []}
+        speakers={cohort.speakers ?? []}
+      />
 
       {/* Apply or partner */}
       <section className="hf-apply">

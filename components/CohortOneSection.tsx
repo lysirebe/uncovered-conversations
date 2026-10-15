@@ -5,14 +5,16 @@ import { InternRevealCard } from './InternRevealCard'
 import { WorkplaceGallery } from './WorkplaceGallery'
 import { InternLightbox } from './InternLightbox'
 import { SpeakerModal } from './SpeakerModal'
-import { SPOTLIGHT } from '@/data/internship'
-import { INTERN_GALLERY, SPEAKERS } from '@/data/cohort'
-import type { SpotlightIntern } from '@/data/internship'
-import type { Speaker } from '@/data/cohort'
+import type { SpotlightIntern, GalleryItem, Speaker } from '@/lib/sanity'
 
-const TRIPLED_SPEAKERS = [...SPEAKERS, ...SPEAKERS, ...SPEAKERS]
+interface Props {
+  spotlight: SpotlightIntern[]
+  internGallery: GalleryItem[]
+  speakers: Speaker[]
+}
 
-export function CohortOneSection() {
+export function CohortOneSection({ spotlight: SPOTLIGHT, internGallery: INTERN_GALLERY, speakers: SPEAKERS }: Props) {
+  const TRIPLED_SPEAKERS = [...SPEAKERS, ...SPEAKERS, ...SPEAKERS]
   const [intern, setIntern] = useState<SpotlightIntern | null>(null)
   const [speaker, setSpeaker] = useState<Speaker | null>(null)
 

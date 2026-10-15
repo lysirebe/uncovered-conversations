@@ -1,7 +1,7 @@
 'use client'
 
 import { useRef, useState } from 'react'
-import type { GalleryItem } from '@/data/cohort'
+import type { GalleryItem } from '@/lib/sanity'
 
 interface Props { items: GalleryItem[] }
 

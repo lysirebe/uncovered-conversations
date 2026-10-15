@@ -2,10 +2,11 @@
 
 import { useState } from 'react'
 import { FounderLightbox } from './FounderLightbox'
-import { FOUNDERS } from '@/data/partnerships'
-import type { Founder } from '@/data/partnerships'
+import type { FounderHeadshot as Founder } from '@/lib/sanity'
 
-export function FameSection() {
+interface Props { founders: Founder[] }
+
+export function FameSection({ founders: FOUNDERS }: Props) {
   const [founder, setFounder] = useState<Founder | null>(null)
   const tripled = [...FOUNDERS, ...FOUNDERS, ...FOUNDERS]
 

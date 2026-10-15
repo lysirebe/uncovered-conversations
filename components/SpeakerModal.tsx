@@ -1,6 +1,6 @@
 'use client'
 
-import type { Speaker } from '@/data/cohort'
+import type { Speaker } from '@/lib/sanity'
 
 interface Props {
   speaker: Speaker | null

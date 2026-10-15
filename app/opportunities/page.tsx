@@ -1,8 +1,15 @@
 import { Nav } from '@/components/Nav'
 import { Footer } from '@/components/Footer'
-import { FOUNDER_OPPS_FORM, SEEKER_OPPS_FORM } from '@/data/links'
+import { safeQuery, SITE_SETTINGS_QUERY } from '@/lib/sanity'
+import type { SiteSettings } from '@/lib/sanity'
 
-export default function OpportunitiesPage() {
+export const revalidate = 60
+
+export default async function OpportunitiesPage() {
+  const settings = (await safeQuery<SiteSettings>(SITE_SETTINGS_QUERY)) ?? {}
+  const FOUNDER_OPPS_FORM = settings.founderOppsFormUrl ?? ''
+  const SEEKER_OPPS_FORM = settings.seekerOppsFormUrl ?? ''
+
   return (
     <>
       <Nav />

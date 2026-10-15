@@ -3,10 +3,14 @@
 import { useState } from 'react'
 import { HfImg } from './HfImg'
 import { TeamModal } from './TeamModal'
-import { TEAM, FOUNDER } from '@/data/about'
-import type { TeamMember } from '@/data/about'
+import type { TeamMember, Founder } from '@/lib/sanity'
 
-export function TeamSection() {
+interface Props {
+  team: TeamMember[]
+  founder: Founder
+}
+
+export function TeamSection({ team, founder }: Props) {
   const [open, setOpen] = useState<TeamMember | null>(null)
 
   return (
@@ -19,17 +23,17 @@ export function TeamSection() {
           </div>
           <div className="founder">
             <div className="pic">
-              <HfImg src={FOUNDER.photo} alt={FOUNDER.name} pos="center 20%" />
+              <HfImg src={founder.photo} alt={founder.name} pos="center 20%" />
             </div>
             <div>
-              <div className="role">{FOUNDER.role}</div>
-              <div className="name">{FOUNDER.name}</div>
-              <div className="sub">{FOUNDER.quote}</div>
-              <p>{FOUNDER.bio}</p>
+              <div className="role">{founder.role}</div>
+              <div className="name">{founder.name}</div>
+              <div className="sub">{founder.quote}</div>
+              <p>{founder.bio}</p>
             </div>
           </div>
           <div className="grid">
-            {TEAM.map((p) => (
+            {team.map((p) => (
               <div
                 key={p.name}
                 className="person clickable"

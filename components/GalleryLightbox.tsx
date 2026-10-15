@@ -1,7 +1,7 @@
 'use client'
 
 import { useState, useEffect, useCallback } from 'react'
-import type { GalleryPhoto } from '@/data/home'
+import type { GalleryPhoto } from '@/lib/sanity'
 
 interface GalleryLightboxProps {
   photos: GalleryPhoto[]

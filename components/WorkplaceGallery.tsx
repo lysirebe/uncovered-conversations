@@ -2,7 +2,7 @@
 
 import { useState } from 'react'
 import { WorkplaceCollage } from './WorkplaceCollage'
-import type { GalleryItem } from '@/data/cohort'
+import type { GalleryItem } from '@/lib/sanity'
 
 interface Props { items: GalleryItem[] }
 

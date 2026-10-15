@@ -1,7 +1,7 @@
 'use client'
 
 import { HfImg } from './HfImg'
-import type { TeamMember } from '@/data/about'
+import type { TeamMember } from '@/lib/sanity'
 
 interface TeamModalProps {
   person: TeamMember | null
@@ -22,7 +22,7 @@ export function TeamModal({ person, onClose }: TeamModalProps) {
           <div className="hf-modal-body">
             <div className="role">{person.role}</div>
             <div className="name">{person.name}</div>
-            {person.bio.split('\n\n').map((para, i) => (
+            {(person.bio ?? '').split('\n\n').map((para, i) => (
               <p key={i}>{para}</p>
             ))}
           </div>

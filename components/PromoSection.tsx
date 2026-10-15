@@ -2,9 +2,14 @@
 
 import { useState } from 'react'
 import { GalleryLightbox } from './GalleryLightbox'
-import { GALLERY, PROMO_PHOTO } from '@/data/home'
+import type { GalleryPhoto } from '@/lib/sanity'
 
-export function PromoSection() {
+interface Props {
+  gallery: GalleryPhoto[]
+  promoPhoto?: string
+}
+
+export function PromoSection({ gallery: GALLERY, promoPhoto: PROMO_PHOTO }: Props) {
   const [gallery, setGallery] = useState(false)
   const [playing, setPlaying] = useState(false)
 

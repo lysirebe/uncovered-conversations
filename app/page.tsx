@@ -6,10 +6,19 @@ import { HfImg } from '@/components/HfImg'
 import { HeroWordSwap } from '@/components/HeroWordSwap'
 import { PromoSection } from '@/components/PromoSection'
 import { HeroAutoVideo } from '@/components/HeroAutoVideo'
-import { PILLARS, GRAM_STRIP } from '@/data/home'
-import { APPLY_URL } from '@/data/links'
+import { safeQuery, HOME_PAGE_QUERY, SITE_SETTINGS_QUERY } from '@/lib/sanity'
+import type { HomePage as HomePageData, SiteSettings } from '@/lib/sanity'
 
-export default function HomePage() {
+export const revalidate = 60
+
+export default async function HomePage() {
+  const home = (await safeQuery<HomePageData>(HOME_PAGE_QUERY)) ?? {}
+  const settings = (await safeQuery<SiteSettings>(SITE_SETTINGS_QUERY)) ?? {}
+
+  const PILLARS = home.pillars ?? []
+  const GRAM_STRIP = home.gramStrip ?? []
+  const APPLY_URL = settings.applyUrl ?? ''
+
   return (
     <>
       <Nav />
@@ -130,7 +139,7 @@ export default function HomePage() {
       </section>
 
       {/* Glimpse into our community */}
-      <PromoSection />
+      <PromoSection gallery={home.gallery ?? []} promoPhoto={home.promoPhoto} />
 
       {/* Founder quote */}
       <section className="hf-quote">
